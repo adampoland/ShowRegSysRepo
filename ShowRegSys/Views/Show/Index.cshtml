@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ShowRegSys.Models.Show>
+
+@{
+    ViewBag.Title = "Shows";
+}
+
+<h2>Shows</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rank)
+        </th>
+        <th>
+            Organize
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rank.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organizer.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ShowID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ShowID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ShowID })
+        </td>
+    </tr>
+}
+
+</table>

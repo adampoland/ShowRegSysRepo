@@ -1,0 +1,35 @@
+﻿@model ShowRegSys.Models.Enrollment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        
+    <fieldset>
+        <legend>Enrollment</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShowID, "Show")
+        </div>
+        <div class="editor-label">
+            @Html.DropDownList("ShowID", string.Empty)
+        </div>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.DogID, "Dog")
+        </div>
+        <div class="editor-label">
+            @Html.DropDownList("DogID", string.Empty)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

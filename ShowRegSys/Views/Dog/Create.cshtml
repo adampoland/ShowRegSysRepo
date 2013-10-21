@@ -1,0 +1,105 @@
+﻿@model ShowRegSys.Models.Dog
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Dog</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PKR)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PKR)
+            @Html.ValidationMessageFor(model => model.PKR)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BreedID, "Breed")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("BreedID", String.Empty)
+            @Html.ValidationMessageFor(model => model.BreedID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColorID, "Color")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ColorID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Color)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("GenderID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TattooOrChip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TattooOrChip)
+            @Html.ValidationMessageFor(model => model.TattooOrChip)
+        </div>
+        
+        <div class="editor-label">
+            @Html.Hidden("UserID")
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Breeder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Breeder)
+            @Html.ValidationMessageFor(model => model.Breeder)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BirthDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BirthDate)
+            @Html.ValidationMessageFor(model => model.BirthDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Titles)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Titles)
+            @Html.ValidationMessageFor(model => model.Titles)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,113 @@
+﻿@model ShowRegSys.Models.Dog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Dog</legend>
+    <table>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Name)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.PKR)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PKR)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Breed)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Breed.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Color)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Color.NameEN)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Gender)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Gender.NameEN)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.TattooOrChip)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TattooOrChip)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor( model => model.User)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.User.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.Breeder)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Breeder)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.User.City)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.User.City)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.BirthDate)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.BirthDate)
+            </td>
+        </tr>
+    </table>
+
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Registered on:</th>
+            </tr>
+            @foreach(var item in Model.Enrollments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shows.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

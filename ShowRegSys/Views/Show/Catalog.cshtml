@@ -1,0 +1,68 @@
+﻿@model ShowRegSys.Models.Show
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Show details:</h2>
+<table>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Name)    </b></td>
+        <td>@Html.DisplayFor(model => model.Name)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Date):</b></td>
+        <td>@Html.DisplayFor(model => model.Date)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Rank):</b></td>
+        <td>@Html.DisplayFor(model => model.Rank.Name)</td>
+    </tr>
+    <tr>
+        <td><b>Organizer name:</b></td>
+        <td>@Html.DisplayFor(model => model.Organizer.Name)</td>
+    </tr>
+    <tr>
+        <td><b>Telephone:</b></td>
+        <td>@Html.DisplayFor(model => model.Organizer.Telephone)</td>
+    </tr>
+    <tr>
+        <td><b>Email:</b></td>
+        <td>@Html.DisplayFor(model => model.Organizer.Email)</td>
+    </tr>
+    <tr>
+        <td><b>Bank account:</b></td>
+        <td>@Html.DisplayFor(model => model.Organizer.BankAccount)</td>
+    </tr>
+</table>
+
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Registered dogs:</th>
+            </tr>
+            @foreach(var item in Model.Enrollments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dogs.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dogs.Breed.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dogs.User.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <table>
+
+        </table>
+    </div>
+    
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ShowID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
