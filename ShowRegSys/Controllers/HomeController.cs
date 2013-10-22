@@ -26,7 +26,7 @@ namespace ShowRegSys.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Registration system for Dog Shows in Poland";
 
             return View();
         }
