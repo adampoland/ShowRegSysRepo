@@ -38,7 +38,7 @@ namespace ShowRegSys.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("ShowContext", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("ShowContext", "UserProfile", "UserProfileId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

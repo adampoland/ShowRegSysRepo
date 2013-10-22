@@ -38,20 +38,6 @@ namespace ShowRegSys.Migrations
             breeds.ForEach(b => context.Breeds.AddOrUpdate(p => p.Name, b));
             context.SaveChanges();
 
-            var users = new List<User>
-            {
-                new User { Name = "Adam Grabarek",
-                    City = "Kwidzyn", Adress = "Rzemieœlnica 6" },
-                new User { Name = "Adrianna Adamowicz",
-                    City = "Kwidzyn", Adress = "Toruñska 25" },
-                new User { Name = "Aneta Kolenda",
-                    City = "Warszawa", Adress = "Nowoursynowska 166"},
-                new User { Name = "Zofia Tosiak",
-                    City = "Bydgoszcz", Adress = "Poznañska 4" }
-            };
-
-            users.ForEach(u => context.Users.AddOrUpdate(n => n.Adress, u));
-            context.SaveChanges();
 
             var organizer = new List<Organizer>
             {

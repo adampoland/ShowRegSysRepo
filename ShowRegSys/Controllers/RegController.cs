@@ -62,7 +62,7 @@ namespace ShowRegSys.Controllers
             var userIDb = WebSecurity.GetUserId(User.Identity.Name);
             var userIDa = Convert.ToInt32(userIDb);
             var dogQuery = from d in db.Dogs
-                           where d.User.UserID == userIDa
+                           where d.UserProfile.UserProfileId == userIDa
                            orderby d.Name
                            select d;
             ViewBag.DogID = new SelectList(dogQuery, "DogID", "Name", selectedDog);

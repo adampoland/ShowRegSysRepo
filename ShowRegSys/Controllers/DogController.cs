@@ -41,7 +41,7 @@ namespace ShowRegSys.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var dogs = db.Dogs.Include(d => d.Breed).Include(d => d.User);
+            var dogs = db.Dogs.Include(d => d.Breed).Include(d => d.UserProfile);
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -88,7 +88,7 @@ namespace ShowRegSys.Controllers
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name");
             ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN");
             ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN");
-            ViewBag.UserID = userID;
+            ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View();
         }
 
@@ -110,7 +110,7 @@ namespace ShowRegSys.Controllers
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
             ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN");
             ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN");
-            ViewBag.UserID = Convert.ToInt32(userID);
+            ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View(dog);
         }
 
@@ -125,7 +125,7 @@ namespace ShowRegSys.Controllers
                 return HttpNotFound();
             }
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);
             return View(dog);
         }
 
@@ -143,7 +143,7 @@ namespace ShowRegSys.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);
             return View(dog);
         }
 
@@ -170,16 +170,16 @@ namespace ShowRegSys.Controllers
             Dog dog = db.Dogs.Find(id);
             db.Dogs.Remove(dog);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Moje");
         }
 
         public ActionResult Moje(int? userID)
         {
             var userIDb = WebSecurity.GetUserId(User.Identity.Name);
-            var userIDa = Convert.ToInt32(userIDb);
-            userID = userIDa;
+            var UserProfileID_UserId = Convert.ToInt32(userIDb);
+            userID = UserProfileID_UserId;
             var dogs = from d in db.Dogs
-                       where d.User.UserID == userIDa
+                       where d.UserProfile.UserProfileId == UserProfileID_UserId
                        orderby d.Name
                        select d;
 

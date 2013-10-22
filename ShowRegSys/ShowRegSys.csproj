@@ -199,13 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310211122245_create.cs" />
-    <Compile Include="Migrations\201310211122245_create.Designer.cs">
-      <DependentUpon>201310211122245_create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310211138195_create1.cs" />
-    <Compile Include="Migrations\201310211138195_create1.Designer.cs">
-      <DependentUpon>201310211138195_create1.cs</DependentUpon>
+    <Compile Include="Migrations\201310221053394_Create.cs" />
+    <Compile Include="Migrations\201310221053394_Create.Designer.cs">
+      <DependentUpon>201310221053394_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -361,11 +357,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310211122245_create.resx">
-      <DependentUpon>201310211122245_create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310211138195_create1.resx">
-      <DependentUpon>201310211138195_create1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310221053394_Create.resx">
+      <DependentUpon>201310221053394_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -59,10 +59,10 @@
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor( model => model.User)</b>
+                <b>@Html.DisplayNameFor( model => model.UserProfile.UserName)</b>
             </td>
             <td>
-                @Html.DisplayFor(model => model.User.Name)
+                @Html.DisplayFor(model => model.UserProfile.UserName)
             </td>
         </tr>
         <tr>
@@ -71,14 +71,6 @@
             </td>
             <td>
                 @Html.DisplayFor(model => model.Breeder)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>@Html.DisplayNameFor(model => model.User.City)</b>
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.User.City)
             </td>
         </tr>
         <tr>

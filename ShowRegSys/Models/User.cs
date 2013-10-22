@@ -11,7 +11,5 @@ namespace ShowRegSys.Models
         public string Name { get; set; }
         public string City { get; set; }
         public string Adress { get; set; }
-
-        public virtual ICollection<Dog> Dogs { get; set; }
     }
 }

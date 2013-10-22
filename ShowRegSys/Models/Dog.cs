@@ -27,7 +27,7 @@ namespace ShowRegSys.Models
         public string TattooOrChip { get; set; }
 
         [Required]
-        public int UserID { get; set; }
+        public int UserProfileId { get; set; }
 
         public string Breeder { get; set; }
 
@@ -42,7 +42,7 @@ namespace ShowRegSys.Models
         public virtual Breed Breed { get; set; }
         public virtual Color Color { get; set; }
         public virtual Gender Gender { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }
