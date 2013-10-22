@@ -16,6 +16,7 @@ using ShowRegSys.Filters;
 
 namespace ShowRegSys.Controllers
 {
+    [Authorize]
     [InitializeSimpleMembership] 
     public class DogController : Controller
     {
@@ -125,7 +126,7 @@ namespace ShowRegSys.Controllers
                 return HttpNotFound();
             }
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);
+            /*ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);*/
             return View(dog);
         }
 
@@ -143,7 +144,7 @@ namespace ShowRegSys.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);
+            /*ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);*/
             return View(dog);
         }
 

@@ -14,6 +14,7 @@ using ShowRegSys.Filters;
 
 namespace ShowRegSys.Controllers
 {
+    [Authorize]
     public class RegController : Controller
     {
         private ShowContext db = new ShowContext();

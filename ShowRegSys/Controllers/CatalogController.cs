@@ -10,6 +10,7 @@ using ShowRegSys.DAL;
 
 namespace ShowRegSys.Controllers
 {
+    [Authorize]
     public class CatalogController : Controller
     {
         private ShowContext db = new ShowContext();

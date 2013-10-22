@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ShowRegSys.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

@@ -10,6 +10,7 @@ using ShowRegSys.DAL;
 
 namespace ShowRegSys.Controllers
 {  
+    [Authorize]
     public class ShowController : Controller
     {
         private ShowContext db = new ShowContext();
@@ -51,6 +52,7 @@ namespace ShowRegSys.Controllers
 
         //
         // GET: /Show/Create
+        [Authorize(Roles="Owner")]
         public ActionResult Create()
         {
             RankDropDownList();

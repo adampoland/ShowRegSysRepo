@@ -193,15 +193,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegController.cs" />
     <Compile Include="Controllers\ShowController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\ShowContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310221053394_Create.cs" />
-    <Compile Include="Migrations\201310221053394_Create.Designer.cs">
-      <DependentUpon>201310221053394_Create.cs</DependentUpon>
+    <Compile Include="Migrations\201310221228273_Create.cs" />
+    <Compile Include="Migrations\201310221228273_Create.Designer.cs">
+      <DependentUpon>201310221228273_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -213,7 +212,6 @@
     <Compile Include="Models\Enrollment.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Show.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -335,11 +333,6 @@
     <Content Include="Views\Dog\Create.cshtml" />
     <Content Include="Views\Dog\Edit.cshtml" />
     <Content Include="Views\Dog\Delete.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\Show\Index.cshtml" />
     <Content Include="Views\Show\Details.cshtml" />
     <Content Include="Views\Show\Create.cshtml" />
@@ -357,8 +350,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310221053394_Create.resx">
-      <DependentUpon>201310221053394_Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310221228273_Create.resx">
+      <DependentUpon>201310221228273_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
