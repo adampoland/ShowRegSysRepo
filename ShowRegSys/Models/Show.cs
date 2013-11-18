@@ -11,10 +11,12 @@ namespace ShowRegSys.Models
         public int ShowID { get; set; }
 
         [Required]
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Data")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 

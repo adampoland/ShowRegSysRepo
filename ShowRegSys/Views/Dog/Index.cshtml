@@ -4,31 +4,31 @@
 
 
 @{
-    ViewBag.Title = "Dogs";
+    ViewBag.Title = "Psy";
 }
 
-<h2>Dogs</h2>
+<h2>@ViewBag.Title</h2>
 
 @using(Html.BeginForm("Index", "Dog", FormMethod.Get))
 {
     <p>
-        Find dog by name or breed: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
+        Znajdź psa po imieniu lub rasie @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
     </p>
 }
 <table>
     <tr>
         <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm})
+            @Html.ActionLink("Imię i przydomek", "Index", new { sortOrder = ViewBag.NameSortParm})
         </th>
         <th>
-            Breed
+            Rasa
         </th>
         <th>
-            Owner
+            Właściciel
         </th>
         <th>
-            Birth
+            Data urodzenia
         </th>
         <th></th>
     </tr>
@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.BirthDate)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.DogId })
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.DogId })
         </td>
     </tr>
 }
@@ -56,6 +56,6 @@
 </table>
 <br />
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
 
 @Html.PagedListPager( Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) )

@@ -16,12 +16,15 @@ namespace ShowRegSys.DAL
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Organizer> Organizers { get; set; }
+        public DbSet<Pkr> Pkrs { get; set; }
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Show> Shows { get; set; }
+
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
 }

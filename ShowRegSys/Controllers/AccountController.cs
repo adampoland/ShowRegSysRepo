@@ -10,13 +10,16 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using ShowRegSys.Filters;
 using ShowRegSys.Models;
+using ShowRegSys.DAL;
 
 namespace ShowRegSys.Controllers
 {
+
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+
         //
         // GET: /Account/Login
 

@@ -12,6 +12,8 @@ using System.Security;
 using WebMatrix.WebData;
 using System.Web.Security;
 using ShowRegSys.Filters;
+using ShowRegSys.ViewModels;
+using System.Web.Script.Serialization;
 
 
 namespace ShowRegSys.Controllers
@@ -63,7 +65,16 @@ namespace ShowRegSys.Controllers
             int pageSize = 5;
             int pageNumber = ( page ?? 1);
 
-            return View(dogs.ToPagedList(pageNumber, pageSize));
+            int zlicz = dogs.ToList().Count();
+
+            if (zlicz > 0)
+            {
+                return View(dogs.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return RedirectToAction("NoDog");
+            }
         }
 
         //
@@ -72,6 +83,7 @@ namespace ShowRegSys.Controllers
         public ActionResult Details(int id = 0)
         {
             Dog dog = db.Dogs.Find(id);
+
             if (dog == null)
             {
                 return HttpNotFound();
@@ -82,15 +94,15 @@ namespace ShowRegSys.Controllers
         //
         // GET: /Dog/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int pkrID = 0)
         {
-
-            var userID = WebSecurity.GetUserId(User.Identity.Name);
-            ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name");
-            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN");
-            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN");
-            ViewBag.UserProfileId = Convert.ToInt32(userID);
-            return View();
+            CreateDogViewModel dog = new CreateDogViewModel();
+            dog.UserProfileId = WebSecurity.GetUserId(User.Identity.Name);
+            dog.ListaGender = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
+            dog.ListaColor = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
+            dog.ListaPkr = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
+            dog.BreedList = db.Breeds.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
+            return View(dog);
         }
 
         //
@@ -98,21 +110,39 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Dog dog)
+        public ActionResult Create(CreateDogViewModel dog)
         {
             if (ModelState.IsValid)
             {
-                db.Dogs.Add(dog);
+                Dog newDog = new Dog()
+                {
+                    BirthDate = dog.BirthDate,
+                    GenderID = dog.SelectedGenderFromList,
+                    BreedID = dog.SelectedBreedFromList,
+                    ColorID = dog.SelectedColorFromList,
+                    DogId = dog.DogId,
+                    Name = dog.Name,
+                    numerPKR = dog.SelectedPkrValue + "-" + dog.numerPKR,
+                    PkrID = 2,
+                    TattooOrChip = dog.TattooOrChip,
+                    Titles = dog.Titles,
+                    UserProfileId = dog.UserProfileId
+                };
+
+                db.Dogs.Add(newDog);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Moje");
             }
 
-            var userID = (Guid)Membership.GetUser(User.Identity.Name).ProviderUserKey;
-            ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN");
-            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN");
-            ViewBag.UserProfileId = Convert.ToInt32(userID);
-            return View(dog);
+            return View();
+        }
+
+        public string GetProperBreeds(string pkrName)
+        {
+            var breeds = new List<SelectListItem>();
+            Pkr pkr = db.Pkrs.FirstOrDefault(p => p.Name.Equals(pkrName));
+            List<SelectListItem> properBreedList = db.Breeds.Where(b => b.PkrID == pkr.PkrID).ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
+            return new JavaScriptSerializer().Serialize(properBreedList);
         }
 
         //
@@ -125,8 +155,11 @@ namespace ShowRegSys.Controllers
             {
                 return HttpNotFound();
             }
+            var userID = WebSecurity.GetUserId(User.Identity.Name);
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            /*ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);*/
+            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
+            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
+            ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View(dog);
         }
 
@@ -141,10 +174,13 @@ namespace ShowRegSys.Controllers
             {
                 db.Entry(dog).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Moje");
             }
+            var userID = WebSecurity.GetUserId(User.Identity.Name);
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            /*ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", dog.UserProfileId);*/
+            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
+            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
+            ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View(dog);
         }
 
@@ -183,8 +219,15 @@ namespace ShowRegSys.Controllers
                        where d.UserProfile.UserProfileId == UserProfileID_UserId
                        orderby d.Name
                        select d;
-
-            return View(dogs.ToList());
+            int zlicz = dogs.ToList().Count();
+            if (zlicz > 0)
+            {
+                return View(dogs.ToList());
+            }
+            else
+            {
+                return RedirectToAction("NoDog");
+            }
                        
         }
 
@@ -199,5 +242,11 @@ namespace ShowRegSys.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult NoDog()
+        {
+            return View();
+        }
+
     }
 }

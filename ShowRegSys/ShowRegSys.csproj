@@ -198,9 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310221228273_Create.cs" />
-    <Compile Include="Migrations\201310221228273_Create.Designer.cs">
-      <DependentUpon>201310221228273_Create.cs</DependentUpon>
+    <Compile Include="Migrations\201311122013247_initializa.cs" />
+    <Compile Include="Migrations\201311122013247_initializa.Designer.cs">
+      <DependentUpon>201311122013247_initializa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -210,9 +210,11 @@
     <Compile Include="Models\Breed.cs" />
     <Compile Include="Models\Dog.cs" />
     <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\Pkr.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Show.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CreateDogViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -330,8 +332,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Dog\Index.cshtml" />
     <Content Include="Views\Dog\Details.cshtml" />
-    <Content Include="Views\Dog\Create.cshtml" />
-    <Content Include="Views\Dog\Edit.cshtml" />
     <Content Include="Views\Dog\Delete.cshtml" />
     <Content Include="Views\Show\Index.cshtml" />
     <Content Include="Views\Show\Details.cshtml" />
@@ -342,6 +342,10 @@
     <Content Include="Views\Reg\Create.cshtml" />
     <Content Include="Views\Dog\Moje.cshtml" />
     <Content Include="Views\Show\Catalog.cshtml" />
+    <Content Include="Views\Dog\Edit.cshtml" />
+    <Content Include="Views\Dog\Create.cshtml" />
+    <Content Include="Views\Dog\NoDog.cshtml" />
+    <Content Include="Views\Dog\BazaPusta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,8 +354,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310221228273_Create.resx">
-      <DependentUpon>201310221228273_Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311122013247_initializa.resx">
+      <DependentUpon>201311122013247_initializa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -370,7 +374,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>64209</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:59758/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

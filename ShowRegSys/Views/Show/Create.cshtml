@@ -1,10 +1,11 @@
 ﻿@model ShowRegSys.Models.Show
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nowa wystawa";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
+<br />
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -31,7 +32,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.RankID, "Rank")
+            @Html.LabelFor(model => model.Rank.Name)
         </div>
         <div class="editor-field">
             @Html.DropDownList("RankID", String.Empty)
@@ -39,7 +40,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.OrganizerID, "Organizer")
+            @Html.LabelFor(model => model.Organizer.Name)
         </div>
         <div class="editor-field">
             @Html.DropDownList("OrganizerID", String.Empty)
@@ -47,13 +48,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Stwórz" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy wystaw", "Index")
 </div>
 
 @section Scripts {

@@ -72,6 +72,7 @@ namespace ShowRegSys.Controllers
         private void ShowDropDownList(object selectedShow = null)
         {
             var showQuery = from s in db.Shows
+                            where s.Date > DateTime.Now
                             orderby s.Name
                             select s;
             ViewBag.ShowID = new SelectList(showQuery, "ShowID", "Name", selectedShow);

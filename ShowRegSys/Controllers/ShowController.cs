@@ -20,8 +20,8 @@ namespace ShowRegSys.Controllers
 
         public ActionResult Index()
         {
-            var shows = db.Shows.Include(s => s.Organizer).Include(r => r.Rank);
-
+            var shows = db.Shows.Include(s => s.Organizer).Include(r => r.Rank).Where(d => d.Date >= DateTime.Now);
+                
             return View(shows.ToList());
         }
 
@@ -42,17 +42,23 @@ namespace ShowRegSys.Controllers
         // GET: /Show/Catalog/5
         public ActionResult Catalog(int id = 0)
         {
-            Show show = db.Shows.Find(id);
-            if (show == null)
-            {
-                return HttpNotFound();
-            }
-            return View(show);
+            
+            //Show show = db.Shows.Find(id);
+            //if (show == null)
+            //{
+           //     return HttpNotFound();
+            //}
+            var zgloszonePsy = from d in db.Dogs
+                               join b in db.Breeds on d.BreedID equals b.BreedID
+                               select new {DogID = d.DogId, DogName = d.Name, DogBirth = d.BirthDate, BreedName = b.Name };
+
+
+            return View(zgloszonePsy);
         }
 
         //
         // GET: /Show/Create
-        [Authorize(Roles="Owner")]
+        [Authorize]
         public ActionResult Create()
         {
             RankDropDownList();

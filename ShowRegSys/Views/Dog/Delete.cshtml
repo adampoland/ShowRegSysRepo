@@ -1,38 +1,40 @@
 ﻿@model ShowRegSys.Models.Dog
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Usuń psa";
 }
 
-<h2>Delete</h2>
+<h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy na pewno chcesz usunąć następującego psa?</h3>
+<br />
+
 <fieldset>
     <legend>Dog</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
+         <b>@Html.DisplayNameFor(model => model.Name)</b>
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Name)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Breed.Name)
+         <b>@Html.DisplayNameFor(model => model.Breed.Name)</b>
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Breed.Name)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        <b> @Html.DisplayNameFor(model => model.UserProfile.UserName)</b>
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.UserProfile.UserName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.BirthDate)
+        <b>@Html.DisplayNameFor(model => model.BirthDate)</b>
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.BirthDate)
@@ -41,7 +43,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Moje")
+        <input type="submit" value="Usuń" /> |
+        @Html.ActionLink("Powróć do listy psów", "Moje")
     </p>
 }

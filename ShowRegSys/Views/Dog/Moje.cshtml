@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<ShowRegSys.Models.Dog>
 
 @{
-    ViewBag.Title = "Moje";
+    ViewBag.Title = "Moje Psy";
 }
 
-<h2>Moje</h2>
-
+<h2>@ViewBag.Title</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj psa", "Create")
 </p>
 <table>
     <tr>
@@ -15,18 +14,17 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            Breed
+            @Html.DisplayNameFor(model => model.Breed.Name)
         </th>
         <th>
-            Owner
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BirthDate)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -41,11 +39,10 @@
             @Html.DisplayFor(modelItem => item.BirthDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DogId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DogId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DogId })
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.DogId }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.DogId }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.DogId })
         </td>
     </tr>
-}
-
+    }
 </table>

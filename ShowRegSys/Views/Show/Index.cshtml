@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ShowRegSys.Models.Show>
 
 @{
-    ViewBag.Title = "Shows";
+    ViewBag.Title = "Wystawy";
 }
 
-<h2>Shows</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj wystawę", "Create")
 </p>
 <table>
     <tr>
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Rank)
         </th>
         <th>
-            Organize
+            @Html.DisplayNameFor(model => model.Organizer.Name)
         </th>
         <th></th>
     </tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Organizer.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShowID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShowID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShowID })
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.ShowID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.ShowID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ShowID })
         </td>
     </tr>
 }

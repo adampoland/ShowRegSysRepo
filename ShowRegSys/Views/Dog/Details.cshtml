@@ -4,8 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<h2>Informacje szczegółowe</h2>
 <fieldset>
     <legend>Dog</legend>
     <table>
@@ -19,15 +18,15 @@
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.PKR)</b>
+                <b>@Html.DisplayNameFor(model => model.numerPKR)</b>
             </td>
             <td>
-                @Html.DisplayFor(model => model.PKR)
+                @Html.DisplayFor(model => model.numerPKR)
             </td>
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.Breed)</b>
+                <b>@Html.DisplayNameFor(model => model.Breed.Name)</b>
             </td>
             <td>
                 @Html.DisplayFor(model => model.Breed.Name)
@@ -35,7 +34,7 @@
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.Color)</b>
+                <b>@Html.DisplayNameFor(model => model.Color.NamePL)</b>
             </td>
             <td>
                 @Html.DisplayFor(model => model.Color.NameEN)
@@ -43,7 +42,7 @@
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.Gender)</b>
+                <b>@Html.DisplayNameFor(model => model.Gender.NamePL)</b>
             </td>
             <td>
                 @Html.DisplayFor(model => model.Gender.NameEN)
@@ -86,8 +85,9 @@
     <div class="display-field">
         <table>
             <tr>
-                <th>Registered on:</th>
+                <th>Zgłoszony na:</th>
             </tr>
+            
             @foreach(var item in Model.Enrollments)
             {
                 <tr>
@@ -96,10 +96,11 @@
                     </td>
                 </tr>
             }
+
         </table>
     </div>
 
 </fieldset>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Wróc do listy psów", "Index")
 </p>

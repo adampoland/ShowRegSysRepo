@@ -1,10 +1,10 @@
 ﻿@model ShowRegSys.Models.Show
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły wystawy";
 }
 
-<h2>Show details:</h2>
+<h2>@ViewBag.Title</h2>
 <table>
     <tr>
         <td><b>@Html.DisplayNameFor(model => model.Name)    </b></td>
@@ -15,23 +15,23 @@
         <td>@Html.DisplayFor(model => model.Date)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Rank):</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.Rank.Name):</b></td>
         <td>@Html.DisplayFor(model => model.Rank.Name)</td>
     </tr>
     <tr>
-        <td><b>Organizer name:</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.Organizer.Name):</b></td>
         <td>@Html.DisplayFor(model => model.Organizer.Name)</td>
     </tr>
     <tr>
-        <td><b>Telephone:</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.Organizer.Telephone)</b></td>
         <td>@Html.DisplayFor(model => model.Organizer.Telephone)</td>
     </tr>
     <tr>
-        <td><b>Email:</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.Organizer.Telephone):</b></td>
         <td>@Html.DisplayFor(model => model.Organizer.Email)</td>
     </tr>
     <tr>
-        <td><b>Bank account:</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.Organizer.BankAccount):</b></td>
         <td>@Html.DisplayFor(model => model.Organizer.BankAccount)</td>
     </tr>
 </table>
@@ -39,7 +39,7 @@
     <div class="display-field">
         <table>
             <tr>
-                <th>Registered dogs:</th>
+                <th>Zgłoszone psy:</th>
             </tr>
             @foreach(var item in Model.Enrollments)
             {
@@ -53,6 +53,6 @@
     </div>
     
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ShowID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj wystawę", "Edit", new { id=Model.ShowID }) |
+    @Html.ActionLink("Powrót do listy wystaw", "Index")
 </p>

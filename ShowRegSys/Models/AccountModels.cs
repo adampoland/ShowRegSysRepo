@@ -24,7 +24,24 @@ namespace ShowRegSys.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserProfileId { get; set; }
+
+        [Display(Name = "Właściciel")]
         public string UserName { get; set; }
+
+        [Display(Name = "Ulica")]
+        public string Address { get; set; }
+
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+
+        [Display(Name = "Kod pocztowy")]
+        public string PostCode { get; set; }
+
+        [Display(Name = "Numer telefony")]
+        public string Telephone { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         public virtual ICollection<Dog> dog { get; set; }
 

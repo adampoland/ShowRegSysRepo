@@ -1,10 +1,10 @@
-﻿@model ShowRegSys.Models.Show
-
+﻿@** @model ShowRegSys.Models.Show **@
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Show details:</h2>
+
+@**<h2>Show details:</h2>
 <table>
     <tr>
         <td><b>@Html.DisplayNameFor(model => model.Name)    </b></td>
@@ -50,19 +50,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Dogs.Breed.Name)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dogs.User.Name)
-                    </td>
                 </tr>
             }
         </table>
 
-        <table>
-
-        </table>
     </div>
-    
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ShowID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+    **@

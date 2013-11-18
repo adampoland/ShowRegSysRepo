@@ -4,8 +4,8 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<h2>@ViewBag.Title</h2>
+<br />
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -24,13 +24,62 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BreedID, "Breed")
+            @Html.LabelFor(model => model.PKR)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("BreedID", String.Empty)
+            @Html.EditorFor(model => model.PKR)
+            @Html.ValidationMessageFor(model => model.PKR)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BreedID)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("BreedID", string.Empty)
             @Html.ValidationMessageFor(model => model.BreedID)
         </div>
-                <div class="editor-label">
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ColorID)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ColorID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ColorID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender.NamePL)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("GenderID", String.Empty)
+            @Html.ValidationMessageFor(model => model.GenderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TattooOrChip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TattooOrChip)
+            @Html.ValidationMessageFor(model => model.TattooOrChip)
+        </div>
+
+        <div class="editor-label">
+      @**      @Html.LabelFor(model => model.UserProfile.UserName)**@
+        </div>
+        <div class="editor-field">
+            @Html.Hidden("UserProfileID")
+            @Html.ValidationMessageFor(model => model.UserProfileId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Breeder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Breeder)
+            @Html.ValidationMessageFor(model => model.Breeder)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.BirthDate)
         </div>
         <div class="editor-field">
@@ -38,14 +87,22 @@
             @Html.ValidationMessageFor(model => model.BirthDate)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Titles)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Titles)
+            @Html.ValidationMessageFor(model => model.Titles)
+        </div>
+
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Zapisz" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Moje")
+    @Html.ActionLink("Powrót do listy psów", "Moje")
 </div>
 
 @section Scripts {
