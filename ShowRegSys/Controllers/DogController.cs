@@ -125,7 +125,8 @@ namespace ShowRegSys.Controllers
                     PkrID = 2,
                     TattooOrChip = dog.TattooOrChip,
                     Titles = dog.Titles,
-                    UserProfileId = dog.UserProfileId
+                    UserProfileId = dog.UserProfileId,
+                    Breeder = dog.Breeder
                 };
 
                 db.Dogs.Add(newDog);
@@ -158,6 +159,7 @@ namespace ShowRegSys.Controllers
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
             ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
             ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
+            ViewBag.PkrID = new SelectList(db.Pkrs, "PkrID", "Name", dog.PkrID);
             ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View(dog);
         }
@@ -179,6 +181,7 @@ namespace ShowRegSys.Controllers
             ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
             ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
             ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
+            ViewBag.PkrID = new SelectList(db.Pkrs, "PkrID", "Name", dog.PkrID);
             ViewBag.UserProfileId = Convert.ToInt32(userID);
             return View(dog);
         }
@@ -209,7 +212,7 @@ namespace ShowRegSys.Controllers
             return RedirectToAction("Moje");
         }
 
-        public ActionResult Moje(int? userID)
+        public ActionResult MyDogs(int? userID)
         {
             var userIDb = WebSecurity.GetUserId(User.Identity.Name);
             var UserProfileID_UserId = Convert.ToInt32(userIDb);
@@ -228,12 +231,6 @@ namespace ShowRegSys.Controllers
                 return RedirectToAction("NoDog");
             }
                        
-        }
-
-        public ActionResult Moja()
-        {
-            var dogs = db.Dogs;
-            return View(dogs.ToList());
         }
 
         protected override void Dispose(bool disposing)

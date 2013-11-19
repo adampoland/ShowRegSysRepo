@@ -345,7 +345,7 @@
     <Content Include="Views\Show\Delete.cshtml" />
     <Content Include="Views\Reg\Index.cshtml" />
     <Content Include="Views\Reg\Create.cshtml" />
-    <Content Include="Views\Dog\Moje.cshtml" />
+    <Content Include="Views\Dog\MyDogs.cshtml" />
     <Content Include="Views\Show\Catalog.cshtml" />
     <Content Include="Views\Dog\Edit.cshtml" />
     <Content Include="Views\Dog\Create.cshtml" />
