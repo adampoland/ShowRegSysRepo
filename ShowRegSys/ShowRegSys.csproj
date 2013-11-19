@@ -198,9 +198,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311122013247_initializa.cs" />
-    <Compile Include="Migrations\201311122013247_initializa.Designer.cs">
-      <DependentUpon>201311122013247_initializa.cs</DependentUpon>
+    <Compile Include="Migrations\201311191225532_initialize1.cs" />
+    <Compile Include="Migrations\201311191225532_initialize1.Designer.cs">
+      <DependentUpon>201311191225532_initialize1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311191231416_zmiana.cs" />
+    <Compile Include="Migrations\201311191231416_zmiana.Designer.cs">
+      <DependentUpon>201311191231416_zmiana.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -215,6 +219,7 @@
     <Compile Include="Models\Show.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CreateDogViewModel.cs" />
+    <Compile Include="ViewModels\ShowUserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -346,6 +351,7 @@
     <Content Include="Views\Dog\Create.cshtml" />
     <Content Include="Views\Dog\NoDog.cshtml" />
     <Content Include="Views\Dog\BazaPusta.cshtml" />
+    <Content Include="_AppStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -354,8 +360,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311122013247_initializa.resx">
-      <DependentUpon>201311122013247_initializa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311191225532_initialize1.resx">
+      <DependentUpon>201311191225532_initialize1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311191231416_zmiana.resx">
+      <DependentUpon>201311191231416_zmiana.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

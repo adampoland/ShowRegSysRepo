@@ -38,11 +38,11 @@ namespace ShowRegSys.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("ShowContext", "UserProfile", "UserProfileId", "UserName", autoCreateTables: true);
+                    //WebSecurity.InitializeDatabaseConnection("ShowContext", "UserProfile", "UserProfileId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException("Nie można zainicjować bazy danych członkostwa ASP.NET Simple Membership. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkId=256588", ex);
+                    throw new InvalidOperationException("Nie można zainicjować bazy danych członkostwa ASP.NET Simple Memb  ership. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkId=256588", ex);
                 }
             }
         }

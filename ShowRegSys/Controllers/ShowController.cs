@@ -7,10 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using ShowRegSys.Models;
 using ShowRegSys.DAL;
+using ShowRegSys.Filters;
 
 namespace ShowRegSys.Controllers
 {  
     [Authorize]
+    [InitializeSimpleMembership]
     public class ShowController : Controller
     {
         private ShowContext db = new ShowContext();
@@ -58,7 +60,7 @@ namespace ShowRegSys.Controllers
 
         //
         // GET: /Show/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             RankDropDownList();

@@ -19,7 +19,6 @@ using System.Web.Script.Serialization;
 namespace ShowRegSys.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership] 
     public class DogController : Controller
     {
         private ShowContext db = new ShowContext();

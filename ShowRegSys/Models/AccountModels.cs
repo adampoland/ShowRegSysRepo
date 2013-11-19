@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShowRegSys.Filters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,12 +7,14 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
+
 namespace ShowRegSys.Models
 {
+    [InitializeSimpleMembership]
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("DefaultConnection")
+            : base("ShowContext")
         {
         }
 
@@ -43,6 +46,10 @@ namespace ShowRegSys.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        
+        public int? OrganizerID { get; set; }
+
+        public virtual Organizer organizer { get; set; }
         public virtual ICollection<Dog> dog { get; set; }
 
         

@@ -367,6 +367,11 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Sznaucer œredni czarny", PkrID = 2},
                 new Breed { Name = "Sznaucer œredni pieprz i sól", PkrID = 2},
                 new Breed { Name = "Tosa", PkrID = 2},
+
+
+                //---------------------------------
+                //--------------GRUPA 3------------
+                //---------------------------------
                 new Breed { Name = "Airedale Terrier", PkrID = 3},
                 new Breed { Name = "American Staffordshire Terrier", PkrID = 3},
                 new Breed { Name = "Australian Silky Terrier", PkrID = 3},
@@ -400,6 +405,10 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Terier walijski", PkrID = 3},
                 new Breed { Name = "West Highland White Terrier", PkrID = 3},
                 new Breed { Name = "Yorkshire Terrier", PkrID = 3},
+
+                //---------------------------------
+                //--------------GRUPA 4------------
+                //---------------------------------
                 new Breed { Name = "Jamnik krótkow³osy standardowy", PkrID = 4},
                 new Breed { Name = "Jamnik d³ugow³osy standardowy", PkrID = 4},
                 new Breed { Name = "Jamnik szorstkow³osy standardowy", PkrID = 4},
@@ -409,6 +418,10 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Jamnik krótkow³osy króliczy", PkrID = 4},
                 new Breed { Name = "Jamnik d³ugow³osy króliczy", PkrID = 4},
                 new Breed { Name = "Jamnik szorstkow³osy króliczy", PkrID = 4},
+
+                //---------------------------------
+                //--------------GRUPA 5------------
+                //---------------------------------
                 new Breed { Name = "Akita", PkrID = 5},
                 new Breed { Name = "Akia amerykañska", PkrID = 5},
                 new Breed { Name = "Alaskan Malamute", PkrID = 5},
@@ -471,6 +484,10 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Szpic w³oski", PkrID = 5},
                 new Breed { Name = "Thai Ridgeback Dog", PkrID = 5},
                 new Breed { Name = "Vastgotaspets", PkrID = 5},
+
+                //---------------------------------
+                //--------------GRUPA 6------------
+                //---------------------------------
                 new Breed { Name = "Alpejski goñczy krótkono¿ny", PkrID = 6},
                 new Breed { Name = "Ariegeois", PkrID = 6},
                 new Breed { Name = "Basset artezyjsko-normandzki", PkrID = 6},
@@ -548,21 +565,25 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Szorstkow³osy goñczy wandejski", PkrID = 6},
                 new Breed { Name = "Szorstkow³osy goñczy z Nivernais", PkrID = 6},
                 new Breed { Name = "Westfalski goñczy krótkono¿ny", PkrID = 6},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
 
+                //---------------------------------
+                //--------------GRUPA 2------------
+                //---------------------------------
+                /*new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                new Breed { Name = "", PkrID = 7},
+                */
             };
 
             breeds.ForEach(b => context.Breeds.AddOrUpdate(p => p.Name, b));

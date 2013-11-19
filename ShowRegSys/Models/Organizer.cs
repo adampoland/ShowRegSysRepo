@@ -29,5 +29,6 @@ namespace ShowRegSys.Models
         public string BankAccount { get; set; }
 
         public virtual ICollection<Show> Shows { get; set; }
+        public virtual ICollection<UserProfile> userProfile { get; set; }
     }
 }

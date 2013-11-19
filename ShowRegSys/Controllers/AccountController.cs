@@ -11,14 +11,17 @@ using WebMatrix.WebData;
 using ShowRegSys.Filters;
 using ShowRegSys.Models;
 using ShowRegSys.DAL;
+using ShowRegSys.ViewModels;
 
 namespace ShowRegSys.Controllers
 {
+
 
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private ShowContext db = new ShowContext();
 
         //
         // GET: /Account/Login
@@ -330,6 +333,7 @@ namespace ShowRegSys.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
+
 
         #region Pomocnicy
         private ActionResult RedirectToLocal(string returnUrl)

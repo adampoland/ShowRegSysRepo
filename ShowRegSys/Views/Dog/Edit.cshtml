@@ -1,4 +1,4 @@
-﻿@model ShowRegSys.Models.Dog
+﻿@model ShowRegSys.ViewModels.CreateDogViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -24,35 +24,43 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PKR)
+            @Html.LabelFor(model => model.numerPKR)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PKR)
-            @Html.ValidationMessageFor(model => model.PKR)
+            @Html.EditorFor(model => model.numerPKR)
+            @Html.ValidationMessageFor(model => model.numerPKR)
+        </div>
+
+        <div class="editor-ladel">
+            @Html.LabelFor(model => model.ListaPkr)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.ListaPkr)
+            @Html.ValidationMessageFor(model => model.SelectedPkrValue)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BreedID)
+            @Html.LabelFor(model => model.BreedList)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("BreedID", string.Empty)
-            @Html.ValidationMessageFor(model => model.BreedID)
+            @Html.DropDownListFor(m => m.SelectedBreedFromList, (IEnumerable<SelectListItem>)Model.BreedList)
+            @Html.ValidationMessageFor(model => model.SelectedBreedFromList)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ColorID)
+            @Html.LabelFor(model => model.ListaColor)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ColorID", String.Empty)
-            @Html.ValidationMessageFor(model => model.ColorID)
+            @Html.DropDownListFor(m => m.SelectedColorFromList, (IEnumerable<SelectListItem>)Model.ListaColor)
+            @Html.ValidationMessageFor(model => model.SelectedColorFromList)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Gender.NamePL)
+            @Html.LabelFor(model => model.ListaGender)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GenderID", String.Empty)
-            @Html.ValidationMessageFor(model => model.GenderID)
+            @Html.DropDownListFor(m => m.SelectedGenderFromList, (IEnumerable<SelectListItem>)Model.ListaGender)
+            @Html.ValidationMessageFor(model => model.SelectedGenderFromList)
         </div>
 
         <div class="editor-label">
@@ -62,12 +70,9 @@
             @Html.EditorFor(model => model.TattooOrChip)
             @Html.ValidationMessageFor(model => model.TattooOrChip)
         </div>
-
+        
         <div class="editor-label">
-      @**      @Html.LabelFor(model => model.UserProfile.UserName)**@
-        </div>
-        <div class="editor-field">
-            @Html.Hidden("UserProfileID")
+            @Html.Hidden("UserProfileId")
             @Html.ValidationMessageFor(model => model.UserProfileId)
         </div>
 
@@ -78,7 +83,7 @@
             @Html.EditorFor(model => model.Breeder)
             @Html.ValidationMessageFor(model => model.Breeder)
         </div>
-
+        
         <div class="editor-label">
             @Html.LabelFor(model => model.BirthDate)
         </div>

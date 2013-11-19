@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace ShowRegSys
 {
@@ -23,6 +25,8 @@ namespace ShowRegSys
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            WebSecurity.InitializeDatabaseConnection("ShowContext", "UserProfile", "UserProfileId", "UserName", autoCreateTables: true);
+
         }
     }
 }
