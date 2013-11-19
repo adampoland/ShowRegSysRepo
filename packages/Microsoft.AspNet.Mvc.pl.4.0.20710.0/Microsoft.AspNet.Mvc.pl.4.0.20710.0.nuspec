@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.Mvc.pl</id>
+    <version>4.0.20710.0</version>
+    <title>Zasoby dla języka polskiego dotyczące produktu Microsoft ASP.NET MVC 4</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/MVC_4_eula_PLK.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/mvc</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Ten pakiet zawiera zestawy satelickie dla języka polskiego dotyczące platformy ASP.NET MVC.</description>
+    <summary>Zasoby dla języka polskiego dotyczące pakietu Microsoft.AspNet.Mvc</summary>
+    <language>pl</language>
+    <tags>Microsoft AspNet Mvc AspNetMvc</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Mvc" version="[4.0.20710.0]" />
+    </dependencies>
+    <references />
+  </metadata>
+</package>

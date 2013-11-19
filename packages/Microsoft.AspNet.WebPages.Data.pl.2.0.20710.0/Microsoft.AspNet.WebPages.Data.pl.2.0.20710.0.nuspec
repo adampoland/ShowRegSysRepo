@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.WebPages.Data.pl</id>
+    <version>2.0.20710.0</version>
+    <title>Zasoby dla języka polskiego dotyczące produktu Microsoft ASP.NET Web Pages 2 Data</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/WebPages_2_eula_PLK.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/web-pages</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Ten pakiet zawiera zestawy satelickie dla języka polskiego dotyczące produktu ASP.NET Web Pages 2 Data.</description>
+    <summary>Zasoby dla języka polskiego dotyczące pakietu Microsoft.AspNet.WebPages.Data</summary>
+    <language>pl</language>
+    <tags>Microsoft AspNet WebPages AspNetWebPages</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebPages.Data" version="[2.0.20710.0]" />
+    </dependencies>
+    <references />
+  </metadata>
+</package>
