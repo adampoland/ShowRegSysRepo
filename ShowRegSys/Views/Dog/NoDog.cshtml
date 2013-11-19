@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ShowRegSys.Models.Dog>
+
+@{
+    ViewBag.Title = "Brak psów w bazie";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Obecnie w bazie niema żadnego psa. </h3>
+<h4>@Html.ActionLink("Dodaj swojego psa", "Create")</h4>   
