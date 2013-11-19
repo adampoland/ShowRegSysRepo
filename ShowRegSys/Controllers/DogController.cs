@@ -137,14 +137,6 @@ namespace ShowRegSys.Controllers
             return View();
         }
 
-        public string GetProperBreeds(string pkrName)
-        {
-            var breeds = new List<SelectListItem>();
-            Pkr pkr = db.Pkrs.FirstOrDefault(p => p.Name.Equals(pkrName));
-            List<SelectListItem> properBreedList = db.Breeds.Where(b => b.PkrID == pkr.PkrID).ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
-            return new JavaScriptSerializer().Serialize(properBreedList);
-        }
-
         //
         // GET: /Dog/Edit/5
 
@@ -244,5 +236,13 @@ namespace ShowRegSys.Controllers
             return View();
         }
 
+        public ActionResult GetProperBreeds(string pkrName)
+        {
+            var breeds = new List<SelectListItem>();
+            Pkr pkr = db.Pkrs.FirstOrDefault(p => p.Name.Equals(pkrName));
+            var properBreedList = db.Breeds.Where(b => b.PkrID == pkr.PkrID);
+
+            return Json(new SelectList(properBreedList, "BreedID", "Name"));
+        }
     }
 }

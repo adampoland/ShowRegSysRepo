@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.ListaPkr)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.ListaPkr)
+            @Html.DropDownListFor(m => m.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.ListaPkr, string.Empty)
             @Html.ValidationMessageFor(model => model.SelectedPkrValue)
         </div>
 
@@ -114,34 +114,29 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            //$("#SelectedPkrValue").change(function () {
-            //    $.get('/Dog/GetProperBreeds?pkrName=' + $(this).val(), function (response) {
-            //        var breeds = $.getJSON(response);
-            //        var selectedPkrValue = $("#SelectedBreedFromList");
-
-            //        $("#SelectedBreedFromList").remove();
-            //        for (i = 0; i < breeds; i++) {
-            //            selectedPkrValue.append($("").val(breeds[i].Value).text(breeds[i].text));
-            //        }
-            //    });
-            //});
-
-@*            $("#SelectedPkrValue").change(function () {
-                var SelectedBreedFromList = $("#SelectedBreedFromList");
+            $("#SelectedPkrValue").change(function () {
                 $('#SelectedBreedFromList > option').remove();
 
                 $.ajax({
                     url: '@Url.Action("GetProperBreeds")',
                     data: { pkrName: $(this).val() },
                     cache: false,
-                    dateType: "JSON",
+                    dateType: "json",
+                    type: "POST",
+                    error: function() {
+                        alert("An error occurred.");
+                    },
                     success: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            selectedPkrValue.append("<option>" + data[i] + "</option>");
-                        }
+                        var items = "";
+                        $.each(data, function(i, item)
+                        {
+                            items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                        });
+                        
+                        $("#SelectedBreedFromList").html(items);
                     }
                 });
-            });*@
+            });
         });
     </script>
 }
