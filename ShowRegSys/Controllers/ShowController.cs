@@ -144,6 +144,7 @@ namespace ShowRegSys.Controllers
 
             CreateEditShowViewModel editShow = new CreateEditShowViewModel()
             {
+                ShowID = show.ShowID,
                 Name = show.Name,
                 City = show.City,
                 Place = show.Place,

@@ -224,7 +224,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CreateDogViewModel.cs" />
     <Compile Include="ViewModels\CreateEditShowViewModel.cs" />
-    <Compile Include="ViewModels\ShowUserViewModel.cs" />
+    <Compile Include="ViewModels\EditUserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -359,6 +359,7 @@
     <Content Include="_AppStart.cshtml" />
     <Content Include="Views\Show\MyShows.cshtml" />
     <Content Include="Views\Show\NoShow.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,7 @@ using ShowRegSys.Filters;
 using ShowRegSys.Models;
 using ShowRegSys.DAL;
 using ShowRegSys.ViewModels;
+using System.Data;
 
 namespace ShowRegSys.Controllers
 {
@@ -22,6 +23,59 @@ namespace ShowRegSys.Controllers
     public class AccountController : Controller
     {
         private ShowContext db = new ShowContext();
+        private UsersContext dbUser = new UsersContext();
+
+
+        //
+        //GET /Edit/4
+        public ActionResult Edit(int id = 0)
+        {
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            id = userId;
+
+            UserProfile user = dbUser.UserProfiles.Find(id);
+
+            EditUserViewModel editUser = new EditUserViewModel()
+            {
+                UserProfileId = user.UserProfileId,
+                UserName = user.UserName,
+                Address = user.Address,
+                City = user.City,
+                PostCode = user.PostCode,
+                Email = user.Email,
+                Telephone = user.Telephone,
+                OrganizerID = user.OrganizerID
+            };
+
+            return View(editUser);
+            
+        }
+
+        //
+        //POST /Edit/4
+        [HttpPost]
+        public ActionResult Edit(EditUserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                UserProfile editsUser = dbUser.UserProfiles.Find(user.UserProfileId);
+                editsUser.UserProfileId = user.UserProfileId;
+                editsUser.UserName = user.UserName;
+                editsUser.Address = user.Address;
+                editsUser.City = user.City;
+                editsUser.PostCode = user.PostCode;
+                editsUser.Email = user.Email;
+                editsUser.Telephone = user.Telephone;
+                editsUser.OrganizerID = user.OrganizerID;
+
+                dbUser.Entry(editsUser).State = EntityState.Modified;
+                dbUser.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(user);
+        }
+
 
         //
         // GET: /Account/Login
@@ -113,7 +167,7 @@ namespace ShowRegSys.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Użyj transakcji, aby uniemożliwić użytkownikowi usunięcie jego ostatniego poświadczenia logowania
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
