@@ -1,4 +1,4 @@
-﻿@model ShowRegSys.Models.Dog
+﻿@model ShowRegSys.ViewModels.CreateDogViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -14,6 +14,8 @@
         <legend>Dog</legend>
 
         @Html.HiddenFor(model => model.DogId)
+        @Html.Hidden("UserProfileId")
+
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -24,43 +26,38 @@
         </div>
         
         <div class="editor-ladel">
-            @Html.LabelFor(model => model.Pkr)
+            @Html.LabelFor(model => model.PkrNumber)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("PkrID")
-            @Html.ValidationMessageFor(model => model.Pkr)
-        </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.numerPKR)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.numerPKR)
-            @Html.ValidationMessageFor(model => model.numerPKR)
-        </div>
+            @Html.DropDownListFor(model => model.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.PkrList)
+            @Html.ValidationMessageFor(model => model.SelectedPkrValue)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Breed)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("BreedID")
-            @Html.ValidationMessageFor(model => model.Breed)
+            @Html.EditorFor(model => model.PkrNumber)
+            @Html.ValidationMessageFor(model => model.PkrNumber)
         </div>
         
         <div class="editor-label">
-            @Html.LabelFor(model => model.Color)
+            @Html.LabelFor(model => model.BreedList)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ColorID")
-            @Html.ValidationMessageFor(model => model.Color)
+            @Html.DropDownListFor(m => m.SelectedBreedFromList, (IEnumerable<SelectListItem>)Model.BreedList)
+            @Html.ValidationMessageFor(model => model.BreedList)
         </div>
         
         <div class="editor-label">
-            @Html.LabelFor(model => model.Gender)
+            @Html.LabelFor(model => model.ColorList)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("GenderID")
-            @Html.ValidationMessageFor(model => model.Gender)
+            @Html.DropDownListFor(m => m.SelectedColorFromList, (IEnumerable<SelectListItem>)Model.ColorList)
+            @Html.ValidationMessageFor(model => model.ColorList)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GenderList)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(m => m.SelectedGenderFromList, (IEnumerable<SelectListItem>)Model.GenderList)
+            @Html.ValidationMessageFor(model => model.SelectedGenderFromList)
         </div>
         
         <div class="editor-label">
@@ -71,11 +68,6 @@
             @Html.ValidationMessageFor(model => model.TattooOrChip)
         </div>
         
-        <div class="editor-label">
-            @Html.Hidden("UserProfileId")
-            @Html.ValidationMessageFor(model => model.UserProfileId)
-        </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Breeder)
         </div>
@@ -107,9 +99,38 @@
 }
 
 <div>
-    @Html.ActionLink("Powrót do listy psów", "Moje")
+    @Html.ActionLink("Powrót do listy psów", "MyDogs")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SelectedPkrValue").change(function () {
+                $('#SelectedBreedFromList > option').remove();
+
+                $.ajax({
+                    url: '@Url.Action("GetProperBreeds")',
+                    data: { pkrName: $(this).val() },
+                    cache: false,
+                    dateType: "json",
+                    type: "POST",
+                    error: function() {
+                        alert("An error occurred.");
+                    },
+                    success: function (data) {
+                        var items = "";
+                        $.each(data, function(i, item)
+                        {
+                            items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                        });
+                        
+                        $("#SelectedBreedFromList").html(items);
+                    }
+                });
+            });
+        });
+    </script>
 }
+

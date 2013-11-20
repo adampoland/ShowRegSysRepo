@@ -1,5 +1,4 @@
-﻿@model ShowRegSys.Models.Show
-
+﻿@model ShowRegSys.ViewModels.CreateEditShowViewModel
 @{
     ViewBag.Title = "Nowa wystawa";
 }
@@ -14,13 +13,28 @@
     <fieldset>
         <legend>Show</legend>
 
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Place)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Place)
+            @Html.ValidationMessageFor(model => model.Place)
         </div>
 
         <div class="editor-label">
@@ -32,13 +46,29 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Rank.Name)
+            @Html.LabelFor(model => model.RankList)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("RankID", String.Empty)
-            @Html.ValidationMessageFor(model => model.Rank)
+            @Html.DropDownListFor(m => m.SelectedRankFromList, (IEnumerable<SelectListItem>)Model.RankList, string.Empty)
+            @Html.ValidationMessageFor(model => model.SelectedRankFromList)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Attention)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Attention)
+            @Html.ValidationMessageFor(model => model.Attention)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EnrollmentDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EnrollmentDate)
+            @Html.ValidationMessageFor(model => model.EnrollmentDate)
+        </div>
+        @*
         <div class="editor-label">
             @Html.LabelFor(model => model.Organizer.Name)
         </div>
@@ -46,7 +76,7 @@
             @Html.DropDownList("OrganizerID", String.Empty)
             @Html.ValidationMessageFor(model => model.OrganizerID)
         </div>
-
+        *@
         <p>
             <input type="submit" value="Stwórz" />
         </p>

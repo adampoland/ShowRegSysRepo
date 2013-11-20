@@ -23,8 +23,9 @@ namespace ShowRegSys.Controllers
     {
         private ShowContext db = new ShowContext();
 
-        //
-        // GET: /Dog/
+        //--------------------------------------
+        //------------GET: /Dog/---------------
+        //--------------------------------------
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             
@@ -97,9 +98,9 @@ namespace ShowRegSys.Controllers
         {
             CreateDogViewModel dog = new CreateDogViewModel();
             dog.UserProfileId = WebSecurity.GetUserId(User.Identity.Name);
-            dog.ListaGender = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
-            dog.ListaColor = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
-            dog.ListaPkr = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
+            dog.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
+            dog.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
+            dog.PkrList = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
             dog.BreedList = db.Breeds.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
             return View(dog);
         }
@@ -113,6 +114,11 @@ namespace ShowRegSys.Controllers
         {
             if (ModelState.IsValid)
             {
+                int getPkrID = (from m in db.Pkrs
+                             where m.Name == dog.SelectedPkrValue
+                             select m.PkrID).First();
+
+
                 Dog newDog = new Dog()
                 {
                     BirthDate = dog.BirthDate,
@@ -121,8 +127,8 @@ namespace ShowRegSys.Controllers
                     ColorID = dog.SelectedColorFromList,
                     DogId = dog.DogId,
                     Name = dog.Name,
-                    numerPKR = dog.SelectedPkrValue + "-" + dog.numerPKR,
-                    PkrID = 2,
+                    numerPKR = dog.PkrNumber,
+                    PkrID = getPkrID,
                     TattooOrChip = dog.TattooOrChip,
                     Titles = dog.Titles,
                     UserProfileId = dog.UserProfileId,
@@ -131,7 +137,7 @@ namespace ShowRegSys.Controllers
 
                 db.Dogs.Add(newDog);
                 db.SaveChanges();
-                return RedirectToAction("Moje");
+                return RedirectToAction("MyDogs");
             }
 
             return View();
@@ -142,18 +148,37 @@ namespace ShowRegSys.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+           
+            
             Dog dog = db.Dogs.Find(id);
             if (dog == null)
             {
                 return HttpNotFound();
             }
+            
             var userID = WebSecurity.GetUserId(User.Identity.Name);
-            ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
-            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
-            ViewBag.PkrID = new SelectList(db.Pkrs, "PkrID", "Name", dog.PkrID);
-            ViewBag.UserProfileId = Convert.ToInt32(userID);
-            return View(dog);
+
+            CreateDogViewModel dogEdit = new CreateDogViewModel()
+            {
+                DogId = dog.DogId,
+                Name = dog.Name,
+                PkrNumber = dog.numerPKR,
+                SelectedBreedFromList = dog.BreedID,
+                SelectedColorFromList = dog.ColorID,
+                SelectedGenderFromList = dog.GenderID,
+                TattooOrChip = dog.TattooOrChip,
+                UserProfileId = userID,
+                Breeder = dog.Breeder,
+                BirthDate = dog.BirthDate,
+                Titles = dog.Titles,
+                SelectedPkrValue = dog.Pkr.Name
+            };
+            dogEdit.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
+            dogEdit.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
+            dogEdit.PkrList = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
+            dogEdit.BreedList = db.Breeds.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
+
+            return View(dogEdit);
         }
 
         //
@@ -161,21 +186,45 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Dog dog)
+        public ActionResult Edit(CreateDogViewModel dogEdit)
         {
+            var userID = WebSecurity.GetUserId(User.Identity.Name);
+
             if (ModelState.IsValid)
             {
-                db.Entry(dog).State = EntityState.Modified;
+                int getPkrID = (from m in db.Pkrs
+                                where m.Name == dogEdit.SelectedPkrValue
+                                select m.PkrID).First();
+
+                Dog dogEdits = new Dog()
+                {
+                    BirthDate = dogEdit.BirthDate,
+                    GenderID = dogEdit.SelectedGenderFromList,
+                    BreedID = dogEdit.SelectedBreedFromList,
+                    ColorID = dogEdit.SelectedColorFromList,
+                    DogId = dogEdit.DogId,
+                    Name = dogEdit.Name,
+                    numerPKR = dogEdit.PkrNumber,
+                    PkrID = getPkrID,
+                    TattooOrChip = dogEdit.TattooOrChip,
+                    Titles = dogEdit.Titles,
+                    UserProfileId = dogEdit.UserProfileId,
+                    Breeder = dogEdit.Breeder
+                };
+                
+
+                db.Entry(dogEdits).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Moje");
+                return RedirectToAction("MyDogs");
             }
-            var userID = WebSecurity.GetUserId(User.Identity.Name);
-            ViewBag.BreedID = new SelectList(db.Breeds, "BreedID", "Name", dog.BreedID);
-            ViewBag.ColorID = new SelectList(db.Colors, "ColorID", "NameEN", dog.ColorID);
-            ViewBag.GenderID = new SelectList(db.Genders, "GenderID", "NameEN", dog.GenderID);
-            ViewBag.PkrID = new SelectList(db.Pkrs, "PkrID", "Name", dog.PkrID);
-            ViewBag.UserProfileId = Convert.ToInt32(userID);
-            return View(dog);
+            dogEdit.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
+            dogEdit.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
+            dogEdit.PkrList = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
+            dogEdit.BreedList = db.Breeds.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
+
+
+            return View(dogEdit);
+
         }
 
         //
@@ -201,7 +250,7 @@ namespace ShowRegSys.Controllers
             Dog dog = db.Dogs.Find(id);
             db.Dogs.Remove(dog);
             db.SaveChanges();
-            return RedirectToAction("Moje");
+            return RedirectToAction("MyDogs");
         }
 
         public ActionResult MyDogs(int? userID)

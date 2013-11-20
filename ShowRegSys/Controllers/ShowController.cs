@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using ShowRegSys.Models;
 using ShowRegSys.DAL;
 using ShowRegSys.Filters;
+using System.Web.Security;
+using WebMatrix.WebData;
+using ShowRegSys.ViewModels;
 
 namespace ShowRegSys.Controllers
 {  
@@ -16,15 +19,32 @@ namespace ShowRegSys.Controllers
     public class ShowController : Controller
     {
         private ShowContext db = new ShowContext();
+        private UsersContext dbUser = new UsersContext();
 
         //
         // GET: /Show/
 
         public ActionResult Index()
         {
-            var shows = db.Shows.Include(s => s.Organizer).Include(r => r.Rank).Where(d => d.Date >= DateTime.Now);
-                
+            var shows = db.Shows.Include(o => o.Organizer).Include(r => r.Rank);
+
             return View(shows.ToList());
+        }
+
+        public ActionResult MyShows()
+        {
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var getOrgId = (from u in dbUser.UserProfiles
+                            where u.UserProfileId == userId
+                            select u.OrganizerID).First();
+
+            int getOrganizerId = Convert.ToInt16(getOrgId);
+
+            var shows = db.Shows.Include(s => s.Organizer).Include(r => r.Rank).Where(d => d.Date >= DateTime.Now && d.OrganizerID == getOrganizerId);
+
+            return View(shows.ToList());
+
         }
 
         //
@@ -60,36 +80,55 @@ namespace ShowRegSys.Controllers
 
         //
         // GET: /Show/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Organizer")]
         public ActionResult Create()
         {
-            RankDropDownList();
-            OrganizerDropDownList();
-            return View();
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            int getOrgId = Convert.ToInt16((from u in dbUser.UserProfiles
+                            where u.UserProfileId == userId
+                            select u.OrganizerID).First());
+
+
+            CreateEditShowViewModel show = new CreateEditShowViewModel();
+            show.OrganizerID = getOrgId;
+            show.RankList = db.Ranks.ToList().Select(r => new SelectListItem { Text = r.Name, Value = r.RankID.ToString() }).ToList();
+            
+            return View(show);
         }
 
         //
         // POST: /Show/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShowID, Name, Date, RankID, OrganizerID")] Show show)
+        public ActionResult Create(CreateEditShowViewModel show)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                int userId = WebSecurity.GetUserId(User.Identity.Name);
+                
+                int getOrgId = Convert.ToInt16((from u in dbUser.UserProfiles
+                            where u.UserProfileId == userId
+                            select u.OrganizerID).First());
+
+                Show newShow = new Show()
                 {
-                    db.Shows.Add(show);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                    Name = show.Name,
+                    City = show.City,
+                    Place = show.Place,
+                    Date = show.Date,
+                    RankID = show.SelectedRankFromList,
+                    Attention = show.Attention,
+                    EnrollmentDate = show.EnrollmentDate,
+                    OrganizerID = getOrgId
+                };
+                show.RankList = db.Ranks.ToList().Select(r => new SelectListItem { Text = r.Name, Value = r.RankID.ToString() }).ToList();
+                
+                    db.Shows.Add(newShow);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unadle to save chandes.");
-            }
-            RankDropDownList(show.RankID);
-            OrganizerDropDownList(show.OrganizerID);
-            return View(show);
+            return View();
         }
 
         //
@@ -100,11 +139,23 @@ namespace ShowRegSys.Controllers
             Show show = db.Shows.Find(id);
             if (show == null)
             {
-                return HttpNotFound();
+                return View("NoShow");
             }
-            RankDropDownList(show.RankID);
-            OrganizerDropDownList(show.OrganizerID);
-            return View(show);
+
+            CreateEditShowViewModel editShow = new CreateEditShowViewModel()
+            {
+                Name = show.Name,
+                City = show.City,
+                Place = show.Place,
+                Date = show.Date,
+                SelectedRankFromList = show.RankID,
+                Attention = show.Attention,
+                EnrollmentDate = show.EnrollmentDate,
+                OrganizerID = show.OrganizerID
+            };
+            editShow.RankList = db.Ranks.ToList().Select(r => new SelectListItem { Text = r.Name, Value = r.RankID.ToString() }).ToList();
+
+            return View(editShow);
         }
 
         //
@@ -112,15 +163,29 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Show show)
+        public ActionResult Edit(CreateEditShowViewModel editShow)
         {
             if (ModelState.IsValid)
             {
+                Show show = db.Shows.Find(editShow.ShowID);
+                
+                show.Name = editShow.Name;
+                show.City = editShow.City;
+                show.Place = editShow.Place;
+                show.Date = editShow.Date;
+                show.RankID = editShow.SelectedRankFromList;
+                show.Attention = editShow.Attention;
+                show.EnrollmentDate = editShow.EnrollmentDate;
+                show.OrganizerID = editShow.OrganizerID;
+                
+
                 db.Entry(show).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyShows");
             }
-            return View(show);
+
+            editShow.RankList = db.Ranks.ToList().Select(r => new SelectListItem { Text = r.Name, Value = r.RankID.ToString() }).ToList();
+            return View(editShow);
         }
 
         //
@@ -129,8 +194,8 @@ namespace ShowRegSys.Controllers
         public ActionResult Delete(int id = 0)
         {
             Show show = db.Shows.Find(id);
-            if (show == null)
-            {
+            if (show ==     null)
+            {   
                 return HttpNotFound();
             }
             return View(show);

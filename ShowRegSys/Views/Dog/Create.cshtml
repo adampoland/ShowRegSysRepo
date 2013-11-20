@@ -24,41 +24,36 @@
         </div>
         
         <div class="editor-label">
-            @Html.LabelFor(model => model.numerPKR)
+            @Html.LabelFor(model => model.PkrNumber)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.numerPKR)
-            @Html.ValidationMessageFor(model => model.numerPKR)
-        </div>
-        <div class="editor-ladel">
-            @Html.LabelFor(model => model.ListaPkr)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(m => m.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.ListaPkr, string.Empty)
+            @Html.DropDownListFor(m => m.SelectedPkrValue, (IEnumerable<SelectListItem>)Model.PkrList, string.Empty)
             @Html.ValidationMessageFor(model => model.SelectedPkrValue)
+            
+            @Html.EditorFor(model => model.PkrNumber)
+            @Html.ValidationMessageFor(model => model.PkrNumber)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.BreedList)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.SelectedBreedFromList, (IEnumerable<SelectListItem>)Model.BreedList)
+            @Html.DropDownListFor(m => m.SelectedBreedFromList, (IEnumerable<SelectListItem>)Model.BreedList, string.Empty)
             @Html.ValidationMessageFor(model => model.SelectedBreedFromList)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ListaColor)
+            @Html.LabelFor(model => model.ColorList)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.SelectedColorFromList, (IEnumerable<SelectListItem>)Model.ListaColor)
+            @Html.DropDownListFor(m => m.SelectedColorFromList, (IEnumerable<SelectListItem>)Model.ColorList, String.Empty)
             @Html.ValidationMessageFor(model => model.SelectedColorFromList)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ListaGender)
+            @Html.LabelFor(model => model.GenderList)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(m => m.SelectedGenderFromList, (IEnumerable<SelectListItem>)Model.ListaGender)
+            @Html.DropDownListFor(m => m.SelectedGenderFromList, (IEnumerable<SelectListItem>)Model.GenderList, String.Empty)
             @Html.ValidationMessageFor(model => model.SelectedGenderFromList)
         </div>
 
@@ -100,13 +95,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Dodaj" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Moje")
+    @Html.ActionLink("Powrót do listy psów", "MyDogs")
 </div>
 
 @section Scripts {
