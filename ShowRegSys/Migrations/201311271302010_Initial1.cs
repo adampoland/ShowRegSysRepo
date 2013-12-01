@@ -3,7 +3,7 @@ namespace ShowRegSys.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialize1 : DbMigration
+    public partial class Initial1 : DbMigration
     {
         public override void Up()
         {
@@ -89,7 +89,7 @@ namespace ShowRegSys.Migrations
                         PostCode = c.String(),
                         Telephone = c.String(),
                         Email = c.String(),
-                        OrganizerID = c.Int(nullable: false),
+                        OrganizerID = c.Int(),
                     })
                 .PrimaryKey(t => t.UserProfileId)
                 .ForeignKey("dbo.Organizer", t => t.OrganizerID)
@@ -106,6 +106,7 @@ namespace ShowRegSys.Migrations
                         Email = c.String(),
                         Telephone = c.String(),
                         BankAccount = c.String(),
+                        WebAdress = c.String(),
                     })
                 .PrimaryKey(t => t.OrganizerID);
             
@@ -115,8 +116,12 @@ namespace ShowRegSys.Migrations
                     {
                         ShowID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
+                        City = c.String(nullable: false),
+                        Place = c.String(nullable: false),
                         Date = c.DateTime(nullable: false),
                         RankID = c.Int(nullable: false),
+                        Attention = c.String(nullable: false),
+                        EnrollmentDate = c.DateTime(nullable: false),
                         OrganizerID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ShowID)
@@ -141,17 +146,31 @@ namespace ShowRegSys.Migrations
                         EnrollmentID = c.Int(nullable: false, identity: true),
                         ShowID = c.Int(nullable: false),
                         DogID = c.Int(nullable: false),
+                        ClassID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EnrollmentID)
                 .ForeignKey("dbo.Show", t => t.ShowID)
                 .ForeignKey("dbo.Dog", t => t.DogID)
+                .ForeignKey("dbo.Class", t => t.ClassID)
                 .Index(t => t.ShowID)
-                .Index(t => t.DogID);
+                .Index(t => t.DogID)
+                .Index(t => t.ClassID);
+            
+            CreateTable(
+                "dbo.Class",
+                c => new
+                    {
+                        ClassID = c.Int(nullable: false, identity: true),
+                        NamePL = c.String(),
+                        NameEN = c.String(),
+                    })
+                .PrimaryKey(t => t.ClassID);
             
         }
         
         public override void Down()
         {
+            DropIndex("dbo.Enrollment", new[] { "ClassID" });
             DropIndex("dbo.Enrollment", new[] { "DogID" });
             DropIndex("dbo.Enrollment", new[] { "ShowID" });
             DropIndex("dbo.Show", new[] { "OrganizerID" });
@@ -163,6 +182,7 @@ namespace ShowRegSys.Migrations
             DropIndex("dbo.Dog", new[] { "BreedID" });
             DropIndex("dbo.Dog", new[] { "PkrID" });
             DropIndex("dbo.Breed", new[] { "PkrID" });
+            DropForeignKey("dbo.Enrollment", "ClassID", "dbo.Class");
             DropForeignKey("dbo.Enrollment", "DogID", "dbo.Dog");
             DropForeignKey("dbo.Enrollment", "ShowID", "dbo.Show");
             DropForeignKey("dbo.Show", "OrganizerID", "dbo.Organizer");
@@ -174,6 +194,7 @@ namespace ShowRegSys.Migrations
             DropForeignKey("dbo.Dog", "BreedID", "dbo.Breed");
             DropForeignKey("dbo.Dog", "PkrID", "dbo.Pkr");
             DropForeignKey("dbo.Breed", "PkrID", "dbo.Pkr");
+            DropTable("dbo.Class");
             DropTable("dbo.Enrollment");
             DropTable("dbo.Rank");
             DropTable("dbo.Show");

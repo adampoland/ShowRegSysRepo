@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShowRegSys.ViewModels
 {
-    public class EditUserViewModel
+    public class UserEditViewModel
     {
 
         public int UserProfileId { get; set; }

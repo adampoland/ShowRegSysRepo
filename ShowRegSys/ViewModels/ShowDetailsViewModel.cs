@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+using PagedList;
+using ShowRegSys.Models;
 
 namespace ShowRegSys.ViewModels
 {
-    public class CreateEditShowViewModel
+    public class ShowDetailsViewModel
     {
-        public int ShowID { get; set; }
-        
+        public int? Page { get; set; }
+
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
@@ -25,8 +26,7 @@ namespace ShowRegSys.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        public List<SelectListItem> RankList { get; set; }
-        public int SelectedRankFromList { get; set; }
+        public string RankName { get; set; }
 
         [Display(Name = "Uwagi")]
         public string Attention { get; set; }
@@ -36,7 +36,21 @@ namespace ShowRegSys.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EnrollmentDate { get; set; }
 
-        public int OrganizerID { get; set; }
+        [Display(Name = "Organizator")]
+        public string OrganizerName { get; set; }
 
+        [Display(Name = "Telefon")]
+        public string OrganizerTel { get; set; }
+
+        [Display(Name = "Email")]
+        public string OrganizerEmail { get; set; }
+
+        [Display(Name = "Konto bankowe")]
+        public string OrganizerBankAccount { get; set; }
+
+        [Display(Name = "Adress WWW")]
+        public string OrganizerWww { get; set; }
+
+        public IPagedList<Enrollment> EnrollmentList { get; set; }
     }
 }

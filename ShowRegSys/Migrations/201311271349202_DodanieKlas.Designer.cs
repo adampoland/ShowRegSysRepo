@@ -5,13 +5,13 @@ namespace ShowRegSys.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class initialize1 : IMigrationMetadata
+    public sealed partial class DodanieKlas : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialize1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DodanieKlas));
         
         string IMigrationMetadata.Id
         {
-            get { return "201311191225532_initialize1"; }
+            get { return "201311271349202_DodanieKlas"; }
         }
         
         string IMigrationMetadata.Source

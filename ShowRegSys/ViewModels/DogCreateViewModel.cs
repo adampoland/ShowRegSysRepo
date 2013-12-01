@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShowRegSys.ViewModels
 {
-    public class CreateDogViewModel
+    public class DogCreateViewModel
     {
         public int DogId { get; set; }
 
