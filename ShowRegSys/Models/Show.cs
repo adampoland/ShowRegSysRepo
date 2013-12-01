@@ -47,5 +47,6 @@ namespace ShowRegSys.Models
         public virtual Rank Rank { get; set; }
         public virtual Organizer Organizer { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

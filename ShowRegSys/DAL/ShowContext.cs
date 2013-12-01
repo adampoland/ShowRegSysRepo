@@ -20,6 +20,7 @@ namespace ShowRegSys.DAL
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Show> Shows { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
