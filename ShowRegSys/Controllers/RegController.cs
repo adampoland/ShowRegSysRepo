@@ -11,6 +11,7 @@ using System.Security;
 using WebMatrix.WebData;
 using System.Web.Security;
 using ShowRegSys.Filters;
+using ShowRegSys.ViewModels;
 
 namespace ShowRegSys.Controllers
 {
@@ -22,60 +23,70 @@ namespace ShowRegSys.Controllers
 
         public ActionResult Index()
         {
-            DogDropDownList();
+            /*DogDropDownList();*/
+
+
             return View();
         }
 
         //GET
         public ActionResult Create()
         {
-            DogDropDownList();
-            ShowDropDownList();
+            EnrollmentCreateViewModel enrol = new EnrollmentCreateViewModel();
 
-            return View();
+            var userIDb = WebSecurity.GetUserId(User.Identity.Name);
+            var userIDa = Convert.ToInt32(userIDb);
+
+            enrol.ShowList = db.Shows.ToList().Where(b => b.Date > DateTime.Now).Select(s => new SelectListItem { Text = s.Name, Value = s.ShowID.ToString() }).ToList();
+            enrol.DogList = db.Dogs.ToList().Where(b => b.UserProfile.UserProfileId == userIDa).Select(d => new SelectListItem { Text = d.Name, Value = d.DogId.ToString() }).ToList();
+            enrol.ClassList = db.Classes.ToList().Select(c => new SelectListItem { Text = c.NamePL, Value = c.ClassID.ToString() }).ToList();
+
+            return View(enrol);
 
         }
 
         //POST:
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ShowID, DogId")] Enrollment enrollment)
+        public ActionResult Create(EnrollmentCreateViewModel enrol)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Enrollments.Add(enrollment);
+                    var allElrollments = db.Enrollments;
+
+                    foreach(var item in allElrollments)
+                    {
+                        if(item.DogID == enrol.SelectedDogFromList & item.ShowID == enrol.SelectedShowFromList)
+                        {
+                            return RedirectToAction("DogRegistred");
+                        }
+                    }
+
+
+                    Enrollment newEnrol = new Enrollment()
+                    {
+                        ShowID = enrol.SelectedShowFromList,
+                        DogID = enrol.SelectedDogFromList,
+                        ClassID = enrol.SelectedClassFromList
+                    };
+                    db.Enrollments.Add(newEnrol);
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                    
                 }
             }
             catch (DataException)
             {
                 ModelState.AddModelError("", "Unadle to save chandes.");
             }
-            ShowDropDownList(enrollment.ShowID);
-            DogDropDownList(enrollment.DogID);
-            return View(enrollment);
-        }
-        
-        private void DogDropDownList(object selectedDog = null)
-        {
-            var userIDb = WebSecurity.GetUserId(User.Identity.Name);
-            var userIDa = Convert.ToInt32(userIDb);
-            var dogQuery = from d in db.Dogs
-                           where d.UserProfile.UserProfileId == userIDa
-                           orderby d.Name
-                           select d;
-            ViewBag.DogID = new SelectList(dogQuery, "DogID", "Name", selectedDog);
+            return View();
         }
 
-        private void ShowDropDownList(object selectedShow = null)
+
+        public ActionResult DogRegistred()
         {
-            var showQuery = from s in db.Shows
-                            where s.Date > DateTime.Now
-                            orderby s.Name
-                            select s;
-            ViewBag.ShowID = new SelectList(showQuery, "ShowID", "Name", selectedShow);
+            return View();
         }
     }
 }

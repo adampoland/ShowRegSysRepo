@@ -19,6 +19,8 @@ namespace ShowRegSys.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public DbSet<Organizer> Organizers { get; set; }
     }
 
     [Table("UserProfile")]
@@ -101,7 +103,7 @@ namespace ShowRegSys.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Nazwa użytkownika")]
+        [Display(Name = "Imię i nazwisko")]
         public string UserName { get; set; }
 
         [Required]
@@ -114,6 +116,27 @@ namespace ShowRegSys.Models
         [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasło i jego potwierdzenie są niezgodne.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Adres")]
+        public string Address { get; set; }
+
+        [Required]
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "Kod pocztowy")]
+        public string PostCode { get; set; }
+
+        [Required]
+        [Display(Name = "Numer telefonu")]
+        public string Telephone { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
     }
 
     public class ExternalLogin

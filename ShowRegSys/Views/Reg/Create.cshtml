@@ -1,4 +1,4 @@
-﻿@model ShowRegSys.Models.Enrollment
+﻿@model ShowRegSys.ViewModels.EnrollmentCreateViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -15,19 +15,26 @@
         <legend>Enrollment</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ShowID, "Show")
+            @Html.LabelFor(model => model.ShowList)
         </div>
         <div class="editor-label">
-            @Html.DropDownList("ShowID", string.Empty)
+            @Html.DropDownListFor(model => model.SelectedShowFromList, (IEnumerable<SelectListItem>)Model.ShowList, string.Empty)
+            @Html.ValidationMessageFor(m => m.ShowList)
         </div>
 
         <div class="editor-field">
-            @Html.LabelFor(model => model.DogID, "Dog")
+            @Html.LabelFor(model => model.DogList)
         </div>
         <div class="editor-label">
-            @Html.DropDownList("DogID", string.Empty)
+            @Html.DropDownListFor(model => model.SelectedDogFromList, (IEnumerable<SelectListItem>)Model.DogList, string.Empty)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClassList)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.SelectedClassFromList, (IEnumerable<SelectListItem>)Model.ClassList, string.Empty)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>

@@ -26,6 +26,7 @@ namespace ShowRegSys.Controllers
         //--------------------------------------
         //------------GET: /Dog/---------------
         //--------------------------------------
+        [AllowAnonymous]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             
@@ -80,23 +81,42 @@ namespace ShowRegSys.Controllers
         //
         // GET: /Dog/Details/5
 
-        public ActionResult Details(int id = 0)
+        [AllowAnonymous]
+        public ActionResult Details( DogDetailsViewModel dogDetails, int? page, int id = 0)
         {
+
             Dog dog = db.Dogs.Find(id);
 
             if (dog == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+
+            var enrol = db.Enrollments.Where(e => e.DogID == dog.DogId).OrderBy(e => e.EnrollmentID);
+            var pageIndex = dogDetails.Page ?? 1; //to samo co pageNumber
+            int pageSize = 5;
+
+            dogDetails.Name = dog.Name;
+            dogDetails.numerPKR = dog.numerPKR;
+            dogDetails.PkrName = dog.Pkr.Name;
+            dogDetails.BreedName = dog.Breed.Name;
+            dogDetails.ColorName = dog.Color.NamePL;
+            dogDetails.GenderName = dog.Gender.NamePL;
+            dogDetails.TattooOrChip = dog.TattooOrChip;
+            dogDetails.Breeder = dog.Breeder;
+            dogDetails.BirthDate = dog.BirthDate;
+            dogDetails.Titles = dog.Titles;
+            dogDetails.EnrollmentPagedList = enrol.ToPagedList(pageIndex, pageSize);
+
+            return View(dogDetails);
         }
 
         //
         // GET: /Dog/Create
 
-        public ActionResult Create(int pkrID = 0)
+        public ActionResult Create()
         {
-            CreateDogViewModel dog = new CreateDogViewModel();
+            DogCreateViewModel dog = new DogCreateViewModel();
             dog.UserProfileId = WebSecurity.GetUserId(User.Identity.Name);
             dog.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
             dog.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
@@ -110,7 +130,7 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateDogViewModel dog)
+        public ActionResult Create(DogCreateViewModel dog)
         {
             if (ModelState.IsValid)
             {
@@ -158,7 +178,7 @@ namespace ShowRegSys.Controllers
             
             var userID = WebSecurity.GetUserId(User.Identity.Name);
 
-            CreateDogViewModel dogEdit = new CreateDogViewModel()
+            DogCreateViewModel dogEdit = new DogCreateViewModel()
             {
                 DogId = dog.DogId,
                 Name = dog.Name,
@@ -186,7 +206,7 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CreateDogViewModel dogEdit)
+        public ActionResult Edit(DogCreateViewModel dogEdit)
         {
             var userID = WebSecurity.GetUserId(User.Identity.Name);
 
@@ -248,6 +268,13 @@ namespace ShowRegSys.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Dog dog = db.Dogs.Find(id);
+            var enrol = db.Enrollments.Where(e => e.DogID == dog.DogId).ToList();
+            foreach (var item in enrol)
+            {
+                db.Enrollments.Remove(item);
+                db.SaveChanges();
+            }
+
             db.Dogs.Remove(dog);
             db.SaveChanges();
             return RedirectToAction("MyDogs");

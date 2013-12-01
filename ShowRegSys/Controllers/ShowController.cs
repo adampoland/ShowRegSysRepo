@@ -11,6 +11,7 @@ using ShowRegSys.Filters;
 using System.Web.Security;
 using WebMatrix.WebData;
 using ShowRegSys.ViewModels;
+using PagedList;
 
 namespace ShowRegSys.Controllers
 {  
@@ -50,14 +51,66 @@ namespace ShowRegSys.Controllers
         //
         // GET: /Show/Details/5
 
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(ShowDetailsViewModel showDetails, int? page, string sortOrder, string currentFilter, string searchString, int id = 0)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm
+                = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            if (searchString != null)
+            {
+                showDetails.Page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             Show show = db.Shows.Find(id);
             if (show == null)
             {
                 return HttpNotFound();
             }
-            return View(show);
+
+            var enrol = db.Enrollments.Where(e => e.ShowID == show.ShowID);
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                enrol = enrol.Where(e => e.Dogs.Breed.Name.ToUpper().Contains(searchString.ToUpper()));
+                    
+            }
+
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    enrol = enrol.OrderByDescending(e => e.Classes.NamePL);
+                    break;
+                default:
+                    enrol = enrol.OrderBy(e => e.Classes.NamePL);
+                    break;
+            }
+
+            var pageIndex = showDetails.Page ?? 1;
+            int pageSize = 10;
+
+            showDetails.Name = show.Name;
+            showDetails.City = show.City;
+            showDetails.Place = show.Place;
+            showDetails.Date = show.Date;
+            showDetails.RankName = show.Rank.Name;
+            showDetails.Attention = show.Attention;
+            showDetails.EnrollmentDate = show.EnrollmentDate;
+            showDetails.OrganizerName = show.Organizer.Name;
+            showDetails.OrganizerTel = show.Organizer.Telephone;
+            showDetails.OrganizerEmail = show.Organizer.Email;
+            showDetails.OrganizerBankAccount = show.Organizer.BankAccount;
+            showDetails.OrganizerWww = show.Organizer.WebAdress;
+            showDetails.EnrollmentList = enrol.ToPagedList(pageIndex, pageSize);
+
+            return View(showDetails);
         }
 
         //
@@ -90,7 +143,7 @@ namespace ShowRegSys.Controllers
                             select u.OrganizerID).First());
 
 
-            CreateEditShowViewModel show = new CreateEditShowViewModel();
+            ShowCreateEditViewModel show = new ShowCreateEditViewModel();
             show.OrganizerID = getOrgId;
             show.RankList = db.Ranks.ToList().Select(r => new SelectListItem { Text = r.Name, Value = r.RankID.ToString() }).ToList();
             
@@ -101,7 +154,7 @@ namespace ShowRegSys.Controllers
         // POST: /Show/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateEditShowViewModel show)
+        public ActionResult Create(ShowCreateEditViewModel show)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +195,7 @@ namespace ShowRegSys.Controllers
                 return View("NoShow");
             }
 
-            CreateEditShowViewModel editShow = new CreateEditShowViewModel()
+            ShowCreateEditViewModel editShow = new ShowCreateEditViewModel()
             {
                 ShowID = show.ShowID,
                 Name = show.Name,
@@ -164,7 +217,7 @@ namespace ShowRegSys.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CreateEditShowViewModel editShow)
+        public ActionResult Edit(ShowCreateEditViewModel editShow)
         {
             if (ModelState.IsValid)
             {
@@ -210,6 +263,13 @@ namespace ShowRegSys.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Show show = db.Shows.Find(id);
+            var enrol = db.Enrollments.Where(e => e.ShowID == show.ShowID).ToList();
+            foreach(var item in enrol)
+            {
+                db.Enrollments.Remove(item);
+                db.SaveChanges();
+            }
+
             db.Shows.Remove(show);
             db.SaveChanges();
             return RedirectToAction("Index");

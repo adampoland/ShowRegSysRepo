@@ -19,6 +19,7 @@ namespace ShowRegSys.DAL
         public DbSet<Pkr> Pkrs { get; set; }
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Show> Shows { get; set; }
+        public DbSet<Class> Classes { get; set; }
 
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

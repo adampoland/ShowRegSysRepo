@@ -198,20 +198,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311191225532_initialize1.cs" />
-    <Compile Include="Migrations\201311191225532_initialize1.Designer.cs">
-      <DependentUpon>201311191225532_initialize1.cs</DependentUpon>
+    <Compile Include="Migrations\201311271302010_Initial1.cs" />
+    <Compile Include="Migrations\201311271302010_Initial1.Designer.cs">
+      <DependentUpon>201311271302010_Initial1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311191231416_zmiana.cs" />
-    <Compile Include="Migrations\201311191231416_zmiana.Designer.cs">
-      <DependentUpon>201311191231416_zmiana.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311201904564_AddSomeColumn.cs" />
-    <Compile Include="Migrations\201311201904564_AddSomeColumn.Designer.cs">
-      <DependentUpon>201311201904564_AddSomeColumn.cs</DependentUpon>
+    <Compile Include="Migrations\201311271349202_DodanieKlas.cs" />
+    <Compile Include="Migrations\201311271349202_DodanieKlas.Designer.cs">
+      <DependentUpon>201311271349202_DodanieKlas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Organizer.cs" />
@@ -222,9 +219,12 @@
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Show.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CreateDogViewModel.cs" />
-    <Compile Include="ViewModels\CreateEditShowViewModel.cs" />
-    <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\DogCreateViewModel.cs" />
+    <Compile Include="ViewModels\ShowCreateEditViewModel.cs" />
+    <Compile Include="ViewModels\EnrollmentCreateViewModel.cs" />
+    <Compile Include="ViewModels\DogDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ShowDetailsViewModel.cs" />
+    <Compile Include="ViewModels\UserEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -360,6 +360,7 @@
     <Content Include="Views\Show\MyShows.cshtml" />
     <Content Include="Views\Show\NoShow.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Reg\DogRegistred.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -368,14 +369,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311191225532_initialize1.resx">
-      <DependentUpon>201311191225532_initialize1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311271302010_Initial1.resx">
+      <DependentUpon>201311271302010_Initial1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311191231416_zmiana.resx">
-      <DependentUpon>201311191231416_zmiana.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311201904564_AddSomeColumn.resx">
-      <DependentUpon>201311201904564_AddSomeColumn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311271349202_DodanieKlas.resx">
+      <DependentUpon>201311271349202_DodanieKlas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

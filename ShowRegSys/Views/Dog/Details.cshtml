@@ -1,4 +1,6 @@
-﻿@model ShowRegSys.Models.Dog
+﻿@model ShowRegSys.ViewModels.DogDetailsViewModel
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Details";
@@ -21,32 +23,32 @@
                 <b>@Html.DisplayNameFor(model => model.numerPKR)</b>
             </td>
             <td>
-                @Html.DisplayFor(model => model.Pkr.Name)-
+                @Html.DisplayFor(model => model.PkrName)-
                 @Html.DisplayFor(model => model.numerPKR)
             </td>
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.Breed.Name)</b>
+                <b>@Html.DisplayNameFor(model => model.BreedName)</b>
             </td>
             <td>
-                @Html.DisplayFor(model => model.Breed.Name)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>@Html.DisplayNameFor(model => model.Color.NamePL)</b>
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Color.NameEN)
+                @Html.DisplayFor(model => model.BreedName)
             </td>
         </tr>
         <tr>
             <td>
-                <b>@Html.DisplayNameFor(model => model.Gender.NamePL)</b>
+                <b>@Html.DisplayNameFor(model => model.ColorName)</b>
             </td>
             <td>
-                @Html.DisplayFor(model => model.Gender.NameEN)
+                @Html.DisplayFor(model => model.ColorName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>@Html.DisplayNameFor(model => model.GenderName)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GenderName)
             </td>
         </tr>
         <tr>
@@ -57,14 +59,14 @@
                 @Html.DisplayFor(model => model.TattooOrChip)
             </td>
         </tr>
-        <tr>
+       @* <tr>
             <td>
                 <b>@Html.DisplayNameFor( model => model.UserProfile.UserName)</b>
             </td>
             <td>
                 @Html.DisplayFor(model => model.UserProfile.UserName)
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td>
                 <b>@Html.DisplayNameFor(model => model.Breeder)</b>
@@ -88,18 +90,39 @@
             <tr>
                 <th>Zgłoszony na:</th>
             </tr>
-            
-            @foreach(var item in Model.Enrollments)
+            <tr>
+                <td>
+                    <b>Wystawa</b>
+                </td>
+                <td>
+                    <b>Klasa</b>
+                </td>
+            </tr>
+
+
+            @foreach (var enrol in Model.EnrollmentPagedList)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Shows.Name)
+                        @enrol.Shows.Name
+                    </td>
+                    <td>
+                        @enrol.Classes.NamePL
                     </td>
                 </tr>
-            }
 
+            }
         </table>
     </div>
+    <br />
+
+    Strona @(Model.EnrollmentPagedList.PageCount < Model.EnrollmentPagedList.PageNumber ? 0 : Model.EnrollmentPagedList.PageNumber) z @Model.EnrollmentPagedList.PageCount 
+         
+    @Html.PagedListPager( Model.EnrollmentPagedList, 
+            page => Url.Action("Details", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) )
+
+
+    
 
 </fieldset>
 <p>

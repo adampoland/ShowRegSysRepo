@@ -36,7 +36,7 @@ namespace ShowRegSys.Controllers
 
             UserProfile user = dbUser.UserProfiles.Find(id);
 
-            EditUserViewModel editUser = new EditUserViewModel()
+            UserEditViewModel editUser = new UserEditViewModel()
             {
                 UserProfileId = user.UserProfileId,
                 UserName = user.UserName,
@@ -55,7 +55,7 @@ namespace ShowRegSys.Controllers
         //
         //POST /Edit/4
         [HttpPost]
-        public ActionResult Edit(EditUserViewModel user)
+        public ActionResult Edit(UserEditViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -139,7 +139,8 @@ namespace ShowRegSys.Controllers
                 // Próba zarejestrowania użytkownika
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Address = model.Address, City = model.City, PostCode = model.PostCode, 
+                        Telephone = model.Telephone, Email = model.Email });
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

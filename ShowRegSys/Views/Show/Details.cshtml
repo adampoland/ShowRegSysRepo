@@ -1,4 +1,6 @@
-﻿@model ShowRegSys.Models.Show
+﻿@model ShowRegSys.ViewModels.ShowDetailsViewModel
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Szczegóły wystawy";
@@ -23,28 +25,28 @@
         <td>@Html.DisplayFor(model => model.Date)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Rank.Name):</b></td>
-        <td>@Html.DisplayFor(model => model.Rank.Name)</td>
+        <td><b>@Html.DisplayNameFor(model => model.RankName):</b></td>
+        <td>@Html.DisplayFor(model => model.RankName)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Organizer.Name):</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Name)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerName):</b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerName)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Organizer.Telephone)</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Telephone)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerTel)</b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerTel)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Organizer.Telephone):</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Email)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerEmail):</b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerEmail)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Organizer.BankAccount):</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.BankAccount)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerBankAccount):</b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerBankAccount)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Organizer.WebAdress)    </b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.WebAdress)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerWww)    </b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerWww)</td>
     </tr>
     <tr>
         <td><b>@Html.DisplayNameFor(model => model.Attention)    </b></td>
@@ -56,23 +58,57 @@
     </tr>
 </table>
 
+@using (Html.BeginForm("Details", "Show", FormMethod.Get))
+{
+    <p>
+        Znajdź psy po rasie @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+
     <div class="display-field">
         <table>
             <tr>
-                <th>Zgłoszone psy:</th>
+                <th>
+                    <b>Zgłoszone psy:</b>
+                </th>
             </tr>
-            @foreach(var item in Model.Enrollments)
+            <tr>
+                <td>
+                   <b>Imię i przydomek</b>
+                </td>
+                <td>
+                    <b>Rasa</b>
+                </td>
+                <td>
+                    <b>@Html.ActionLink("Klasa", "Details", new {sortOrder = ViewBag.NameSortParm})</b>
+                </td>
+            </tr>
+            @foreach(var enrol in Model.EnrollmentList)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Dogs.Name)
+                        @enrol.Dogs.Name
+                    </td>
+                    <td>
+                        @enrol.Dogs.Breed.Name
+                    </td>
+                    <td>
+                        @enrol.Classes.NamePL
                     </td>
                 </tr>
             }
+
         </table>
     </div>
+Strona @(Model.EnrollmentList.PageCount < Model.EnrollmentList.PageNumber ? 0 : Model.EnrollmentList.PageNumber) z @Model.EnrollmentList.PageCount
+
+@Html.PagedListPager(Model.EnrollmentList,
+            page => Url.Action("Details", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+
     
 <p>
-    @Html.ActionLink("Edytuj wystawę", "Edit", new { id=Model.ShowID }) |
     @Html.ActionLink("Powrót do listy wystaw", "Index")
 </p>

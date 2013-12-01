@@ -16,7 +16,11 @@ namespace ShowRegSys.Models
         [Required]
         public int DogID { get; set; }
 
+        [Required]
+        public int ClassID { get; set; }
+
         public virtual Show Shows { get; set; }
         public virtual Dog Dogs { get; set; }
+        public virtual Class Classes { get; set; }
     }
 }

@@ -16,6 +16,20 @@ namespace ShowRegSys.Migrations
 
         protected override void Seed(ShowRegSys.DAL.ShowContext context)
         {
+            var classes = new List<Class>
+            {
+                new Class { NamePL = "Baby", NameEN = "Baby" },
+                new Class { NamePL = "Szczeni¹t", NameEN = "Puppy" },
+                new Class { NamePL = "M³odzie¿y", NameEN = "Junior" },
+                new Class { NamePL = "Poœrednia", NameEN = "Intermediate" },
+                new Class { NamePL = "Otwarta", NameEN = "Open" },
+                new Class { NamePL = "U¿ytkowa", NameEN = "Working" },
+                new Class { NamePL = "Championów", NameEN = "Champion" },
+                new Class { NamePL = "Weteranów", NameEN = "Veteran" }
+            };
+            classes.ForEach(p => context.Classes.AddOrUpdate(a => a.NamePL, p));
+            context.SaveChanges();
+
             var pkrs = new List<Pkr>
             {
                 new Pkr { Name = "PKR.I", Number = 1 },
