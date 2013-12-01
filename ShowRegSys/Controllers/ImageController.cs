@@ -76,5 +76,36 @@ namespace ShowRegSys.Controllers
             return View(images.ToList());
         }
 
+        public ActionResult SingleImage(int imageId, int showId)
+        {
+            var images = db.Images.Where(s => s.ShowId == showId).OrderBy(s => s.ImageId).ToArray();
+            ViewBag.CurrentImageId = imageId;
+            ViewBag.CurrentShowId = showId;
+
+            var nextImg = images.FirstOrDefault(i => i.ImageId > imageId);
+            if(nextImg == null)
+            {
+                ViewBag.NextImageId = imageId;
+            }
+            else
+            {
+                int nextId = nextImg.ImageId;
+                ViewBag.NextImageId = nextId;
+            }
+
+            var prevImg = images.LastOrDefault(i => i.ImageId < imageId);
+            if(prevImg == null)
+            {
+                ViewBag.PrevImageId = imageId;
+            }
+            else
+            {
+                int prevId = prevImg.ImageId;
+                ViewBag.PrevImageId = prevId;
+            }
+            
+            var image = db.Images.Find(imageId);
+            return View(image);
+        }
     }
 }

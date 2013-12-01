@@ -1,0 +1,21 @@
+﻿@model ShowRegSys.Models.Image
+
+@{
+    ViewBag.Title = "SingleImage";
+}
+
+<fieldset>
+    <legend>Image</legend>
+
+
+    <a href="@Url.Action("SingleImage", new { imageId = ViewBag.PrevImageId, showId = ViewBag.CurrentShowId })">Poprzednie</a>  || 
+    <a href="@Url.Action("SingleImage", new { imageId = ViewBag.NextImageId, showId = ViewBag.CurrentShowId })">Następne</a>
+
+
+    <div class="display-field">
+        <a href="@(Model.Path)"><img src="@(Model.Path)" width="800"/></a>
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

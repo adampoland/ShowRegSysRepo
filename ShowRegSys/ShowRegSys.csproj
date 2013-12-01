@@ -370,6 +370,7 @@
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\AddDone.cshtml" />
     <Content Include="Views\Image\ImageList.cshtml" />
+    <Content Include="Views\Image\SingleImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

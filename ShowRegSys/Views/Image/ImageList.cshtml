@@ -10,18 +10,13 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
-
-
 @foreach (var item in Model)
 {
 
     <tr>
-        <img src="@(item.Path)" width="30%" />
+        <a href="@Url.Action("SingleImage", new { imageId = item.ImageId, showId = item.ShowId })"><img src="@(item.Path)" width="200" /></a>
+ 
     </tr>
 
-
-
-
 }
-
 </table>
