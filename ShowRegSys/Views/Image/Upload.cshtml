@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+@using (Html.BeginForm("Upload", "Image", new { showID = ViewBag.ShowID }, FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <fieldset>
+        <legend>Prześlij zdjęcie</legend>
+        <h3>Wybierz zdjęcie</h3>
+        <div class="editor-field">
+            @Html.TextBox("file", "", new { type = "file" })
+            
+        </div>
+        <h3>Opis zdjęcia</h3>
+        <div class="=editor-field">
+            @Html.TextBox("imageName")
+        </div>
+
+        <div class="editor-field">
+            <input type="submit" value="Upload"/>
+        </div>
+    </fieldset> 
+
+}

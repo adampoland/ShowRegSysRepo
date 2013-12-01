@@ -96,6 +96,7 @@ namespace ShowRegSys.Controllers
             var pageIndex = showDetails.Page ?? 1;
             int pageSize = 10;
 
+            showDetails.ShowId = show.ShowID;
             showDetails.Name = show.Name;
             showDetails.City = show.City;
             showDetails.Place = show.Place;

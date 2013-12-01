@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ShowRegSys.Models.Image>
+
+@{
+    ViewBag.Title = "ImageList";
+}
+
+<h2>ImageList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+
+
+@foreach (var item in Model)
+{
+
+    <tr>
+        <img src="@(item.Path)" width="30%" />
+    </tr>
+
+
+
+
+}
+
+</table>

@@ -12,6 +12,8 @@ namespace ShowRegSys.ViewModels
     {
         public int? Page { get; set; }
 
+        public int ShowId { get; set; }
+
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
 

@@ -191,6 +191,7 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\DogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\RegController.cs" />
     <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="DAL\ShowContext.cs" />
@@ -198,19 +199,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311271302010_Initial1.cs" />
-    <Compile Include="Migrations\201311271302010_Initial1.Designer.cs">
-      <DependentUpon>201311271302010_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311271349202_DodanieKlas.cs" />
-    <Compile Include="Migrations\201311271349202_DodanieKlas.Designer.cs">
-      <DependentUpon>201311271349202_DodanieKlas.cs</DependentUpon>
+    <Compile Include="Migrations\201312011153511_Initialize.cs" />
+    <Compile Include="Migrations\201312011153511_Initialize.Designer.cs">
+      <DependentUpon>201312011153511_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Organizer.cs" />
     <Compile Include="Models\Breed.cs" />
     <Compile Include="Models\Dog.cs" />
@@ -285,6 +283,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\DSC05334.JPG" />
+    <Content Include="Images\DSC05335.JPG" />
+    <Content Include="Images\DSC05336.JPG" />
+    <Content Include="Images\DSC05337.JPG" />
+    <Content Include="Images\DSC05341.JPG" />
+    <Content Include="Images\DSC05342.JPG" />
+    <Content Include="Images\DSC05343.JPG" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -361,6 +366,10 @@
     <Content Include="Views\Show\NoShow.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Reg\DogRegistred.cshtml" />
+    <Content Include="Views\Image\Upload.cshtml" />
+    <Content Include="Views\Image\Index.cshtml" />
+    <Content Include="Views\Image\AddDone.cshtml" />
+    <Content Include="Views\Image\ImageList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,11 +378,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311271302010_Initial1.resx">
-      <DependentUpon>201311271302010_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311271349202_DodanieKlas.resx">
-      <DependentUpon>201311271349202_DodanieKlas.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201312011153511_Initialize.resx">
+      <DependentUpon>201312011153511_Initialize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
