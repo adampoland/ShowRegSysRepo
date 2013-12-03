@@ -1,0 +1,47 @@
+﻿@model ShowRegSys.Models.UserProfile
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>Role</th>
+    </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(item => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(item => item.Email)
+            </td>
+            <td>
+                @foreach (var item in ViewBag.RolesForThisUser)
+                {
+                    @item
+                }
+            </td>
+
+
+
+
+
+
+        </tr>
+    <tr>
+        <td>
+            
+        </td>
+    </tr>
+    
+
+</table>

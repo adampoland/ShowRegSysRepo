@@ -21,6 +21,7 @@ namespace ShowRegSys.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
 
         public DbSet<Organizer> Organizers { get; set; }
+
     }
 
     [Table("UserProfile")]
@@ -48,10 +49,9 @@ namespace ShowRegSys.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        
         public int? OrganizerID { get; set; }
 
-        public virtual Organizer organizer { get; set; }
+        public virtual Organizer Organizer { get; set; }
         public virtual ICollection<Dog> dog { get; set; }
 
         

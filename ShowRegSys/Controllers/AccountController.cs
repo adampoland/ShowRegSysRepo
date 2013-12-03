@@ -142,6 +142,7 @@ namespace ShowRegSys.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Address = model.Address, City = model.City, PostCode = model.PostCode, 
                         Telephone = model.Telephone, Email = model.Email });
                     WebSecurity.Login(model.UserName, model.Password);
+                    Roles.AddUserToRole(model.UserName, "User");
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

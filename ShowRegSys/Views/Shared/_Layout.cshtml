@@ -21,12 +21,17 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
+                           @* <li>@Html.ActionLink("Strona główna", "Index", "Home")</li> *@    
                             <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                             <li>@Html.ActionLink("Psy", "Index", "Dog")</li>
                             <li>@Html.ActionLink("Moje psy", "MyDogs", "Dog")</li>
+                            @if ( Request.IsAuthenticated && HttpContext.Current.User.IsInRole( "Organizer" ) )
+                                {
+                                    <li>@Html.ActionLink("Moje Wystawy", "MyShows", "Show")</li>
+                                }
                             <li>@Html.ActionLink("Wystawy", "Index", "Show")</li>
                             <li>@Html.ActionLink("Zgłaszanie", "Create", "Reg")</li>
+                            <li>@Html.ActionLink("Admin", "RoleAddToUser", "Admin")</li>
                         </ul>
                     </nav>
                 </div>

@@ -188,7 +188,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\CheckBoxListInfo.cs" />
     <Compile Include="Controllers\DogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -199,9 +201,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201312011153511_Initialize.cs" />
-    <Compile Include="Migrations\201312011153511_Initialize.Designer.cs">
-      <DependentUpon>201312011153511_Initialize.cs</DependentUpon>
+    <Compile Include="Migrations\201312011829110_Initialize.cs" />
+    <Compile Include="Migrations\201312011829110_Initialize.Designer.cs">
+      <DependentUpon>201312011829110_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -216,12 +218,15 @@
     <Compile Include="Models\Pkr.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\UserRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AdminUserEditViewModel.cs" />
     <Compile Include="ViewModels\DogCreateViewModel.cs" />
     <Compile Include="ViewModels\ShowCreateEditViewModel.cs" />
     <Compile Include="ViewModels\EnrollmentCreateViewModel.cs" />
     <Compile Include="ViewModels\DogDetailsViewModel.cs" />
     <Compile Include="ViewModels\ShowDetailsViewModel.cs" />
+    <Compile Include="ViewModels\UserEditRolesViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -371,6 +376,9 @@
     <Content Include="Views\Image\AddDone.cshtml" />
     <Content Include="Views\Image\ImageList.cshtml" />
     <Content Include="Views\Image\SingleImage.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\RoleAddToUser.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -379,8 +387,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201312011153511_Initialize.resx">
-      <DependentUpon>201312011153511_Initialize.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201312011829110_Initialize.resx">
+      <DependentUpon>201312011829110_Initialize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
