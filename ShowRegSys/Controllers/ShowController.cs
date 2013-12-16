@@ -118,18 +118,35 @@ namespace ShowRegSys.Controllers
         // GET: /Show/Catalog/5
         public ActionResult Catalog(int id = 0)
         {
-            
-            //Show show = db.Shows.Find(id);
-            //if (show == null)
-            //{
-           //     return HttpNotFound();
-            //}
-            var zgloszonePsy = from d in db.Dogs
-                               join b in db.Breeds on d.BreedID equals b.BreedID
-                               select new {DogID = d.DogId, DogName = d.Name, DogBirth = d.BirthDate, BreedName = b.Name };
+
+            Show show = db.Shows.Find(id);
+            if (show == null)
+            {
+                return HttpNotFound();
+            }
+
+            var enrol = db.Enrollments.Where(e => e.ShowID == show.ShowID);
+            int orgID = show.OrganizerID;
+            Organizer organizer = db.Organizers.Find(orgID);
+
+            ShowCatalogDetailsViewModel enrolments = new ShowCatalogDetailsViewModel();
+            enrolments.ShowId = show.ShowID;
+            enrolments.ShowName = show.Name;
+            enrolments.City = show.City;
+            enrolments.Place = show.Place;
+            enrolments.Date = show.Date;
+            enrolments.Rank = show.Rank.Name;
+            enrolments.OrganizerName = organizer.Name;
+            enrolments.Telephone = organizer.Telephone;
+            enrolments.Email = organizer.Email;
+            enrolments.BankAccount = organizer.BankAccount;
+            enrolments.WebAddress = organizer.WebAdress;
+            enrolments.Attention = show.Attention;
+            enrolments.EnrolList = db.Enrollments.Where(e => e.ShowID == show.ShowID).OrderBy(e => e.Dogs.PkrID).ThenBy(e => e.Dogs.Breed.Name).ThenBy(e => e.Classes.ClassID).ToList();
 
 
-            return View(zgloszonePsy);
+
+            return View(enrolments);
         }
 
         //
@@ -249,7 +266,7 @@ namespace ShowRegSys.Controllers
         public ActionResult Delete(int id = 0)
         {
             Show show = db.Shows.Find(id);
-            if (show ==     null)
+            if (show == null)
             {   
                 return HttpNotFound();
             }
@@ -268,6 +285,13 @@ namespace ShowRegSys.Controllers
             foreach(var item in enrol)
             {
                 db.Enrollments.Remove(item);
+                db.SaveChanges();
+            }
+
+            var images = db.Images.Where(i => i.ShowId == show.ShowID).ToList();
+            foreach(var item in images)
+            {
+                db.Images.Remove(item);
                 db.SaveChanges();
             }
 

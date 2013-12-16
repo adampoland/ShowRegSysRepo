@@ -26,7 +26,7 @@ namespace ShowRegSys.ViewModels
         [Display(Name = "Maść")]
         public string  ColorName { get; set; }
 
-        [Display(Name = "Rasa")]
+        [Display(Name = "Płeć")]
         public string GenderName { get; set; }
 
         [Display(Name = "Tatuaż lub chip")]

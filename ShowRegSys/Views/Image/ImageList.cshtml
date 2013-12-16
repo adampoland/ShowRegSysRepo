@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<ShowRegSys.Models.Image>
 
 @{
-    ViewBag.Title = "ImageList";
+    ViewBag.Title = "Galeria z wystawy";
 }
 
-<h2>ImageList</h2>
-
+<h2>Galeria z @ViewBag.ShowName</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Upload", new { showId = ViewBag.ShowId })">Dodaj zdjęcie</a>
 </p>
+<br />
 <table>
 @foreach (var item in Model)
 {

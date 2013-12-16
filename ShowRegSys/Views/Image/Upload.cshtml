@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "Prześlij zdjęcie";
 }
 
-<h2>Upload</h2>
+<h2>Prześlij zdjęcie</h2>
 
 @using (Html.BeginForm("Upload", "Image", new { showID = ViewBag.ShowID }, FormMethod.Post,
     new { enctype = "multipart/form-data" }))
@@ -22,7 +22,7 @@
         </div>
 
         <div class="editor-field">
-            <input type="submit" value="Upload"/>
+            <input type="submit" value="Prześlij"/>
         </div>
     </fieldset> 
 

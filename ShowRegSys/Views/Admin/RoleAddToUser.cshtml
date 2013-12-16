@@ -7,12 +7,12 @@
 
     <div class="message-success">@ViewBag.ResultMessage</div>
     <p>
-        Username : @Html.TextBox("UserName")
-        Role Name: @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
+        Nazwa użytkownika : @Html.TextBox("UserName")
+        Role: @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
 
     </p>
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Zapisz" />
 }
 
 
@@ -22,15 +22,15 @@
 {
     @Html.AntiForgeryToken()
     <p>
-        Username : @Html.TextBox("UserName")
-        <input type="submit" value="Get Roles for this User" />
+        Nazwa użytkownika : @Html.TextBox("UserName")
+        <input type="submit" value="Zobacz role użytkownika" />
     </p>
 }
 
 @if (ViewBag.RolesForThisUser != null)
 {
 
-        <h3>Roles for this user </h3>
+        <h3>Role dla danego użytkownika</h3>
         <ol>
             @foreach (string s in ViewBag.RolesForThisUser)
             {

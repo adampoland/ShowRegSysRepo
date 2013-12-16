@@ -27,7 +27,7 @@
     </div>
 
     <div class="display-label">
-        <b> @Html.DisplayNameFor(model => model.UserProfile.UserName)</b>
+        <b>Właściciel</b>
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.UserProfile.UserName)
@@ -44,6 +44,6 @@
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Usuń" /> |
-        @Html.ActionLink("Powróć do listy psów", "Moje")
+        @Html.ActionLink("Powróć do listy psów", "MyDogs")
     </p>
 }

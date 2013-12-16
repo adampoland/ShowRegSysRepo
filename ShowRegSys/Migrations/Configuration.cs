@@ -23,9 +23,10 @@ namespace ShowRegSys.Migrations
                 new Class { NamePL = "M³odzie¿y", NameEN = "Junior" },
                 new Class { NamePL = "Poœrednia", NameEN = "Intermediate" },
                 new Class { NamePL = "Otwarta", NameEN = "Open" },
-                new Class { NamePL = "U¿ytkowa", NameEN = "Working" },
                 new Class { NamePL = "Championów", NameEN = "Champion" },
-                new Class { NamePL = "Weteranów", NameEN = "Veteran" }
+                new Class { NamePL = "Weteranów", NameEN = "Veteran" },
+                new Class { NamePL = "U¿ytkowa", NameEN = "Working" }
+                
             };
             classes.ForEach(p => context.Classes.AddOrUpdate(a => a.NamePL, p));
             context.SaveChanges();
@@ -250,12 +251,46 @@ namespace ShowRegSys.Migrations
 
             var color = new List<Color>
             {
-                new Color { NameEN = "Blue-steel", NamePL = "Stalowo-z³oty" },
-                new Color { NameEN = "Black", NamePL = "Czarny" },
-                new Color { NameEN = "White", NamePL = "Bia³y"  },
-                new Color { NameEN = "Smoke", NamePL = "Podpalany" }
+                new Color { NamePL = "Apricot"},
+                new Color { NamePL = "Arlekin"},
+                new Color { NamePL = "Bo¿owa"},
+                new Color { NamePL = "Be¿owa z bia³ym"},
+                new Color { NamePL = "Be¿owa z czarnym"},
+                new Color { NamePL = "Bia³a"},
+                new Color { NamePL = "Bia³o czarna"},
+                new Color { NamePL = "Bia³o nakrapiana"},
+                new Color { NamePL = "Bicolor"},
+                new Color { NamePL = "Blue"},
+                new Color { NamePL = "B³êkitna"},
+                new Color { NamePL = "Br¹zowa"},
+                new Color { NamePL = "Brunatna"},
+                new Color { NamePL = "Bursztynowa"},
+                new Color { NamePL = "Czarna"},
+                new Color { NamePL = "Czarno-bia³a"},
+                new Color { NamePL = "Czekoladowa"},
+                new Color { NamePL = "Dzicza"},
+                new Color { NamePL = "Grafitowa"},
+                new Color { NamePL = "Jasna"},
+                new Color { NamePL = "Kremowa"},
+                new Color { NamePL = "£aciata"},
+                new Color { NamePL = "Merle"},
+                new Color { NamePL = "Miodowa"},
+                new Color { NamePL = "Musztardowa"},
+                new Color { NamePL = "Niebieska"},
+                new Color { NamePL = "Niebiesko bia³a"},
+                new Color { NamePL = "Niebiesko czarna"},
+                new Color { NamePL = "Niebieska podpalana"},
+                new Color { NamePL = "Orange"},
+                new Color { NamePL = "Piaskowa"},
+                new Color { NamePL = "Pieprz i sól"},
+                new Color { NamePL = "P³owa"},
+                new Color { NamePL = "Prêgowana"},
+                new Color { NamePL = "Ruda"},
+                new Color { NamePL = "Stalowo z³ota"},
+                new Color { NamePL = "Tricolor"},
+                new Color { NamePL = "Z³ota"}
             };
-            color.ForEach(c => context.Colors.AddOrUpdate(a => a.NameEN, c));
+            color.ForEach(c => context.Colors.AddOrUpdate(a => a.NamePL, c));
             context.SaveChanges();
 
             var gender = new List<Gender>
@@ -432,7 +467,7 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Jamnik krótkow³osy króliczy", PkrID = 4},
                 new Breed { Name = "Jamnik d³ugow³osy króliczy", PkrID = 4},
                 new Breed { Name = "Jamnik szorstkow³osy króliczy", PkrID = 4},
-
+                
                 //---------------------------------
                 //--------------GRUPA 5------------
                 //---------------------------------
@@ -498,7 +533,7 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Szpic w³oski", PkrID = 5},
                 new Breed { Name = "Thai Ridgeback Dog", PkrID = 5},
                 new Breed { Name = "Vastgotaspets", PkrID = 5},
-
+                
                 //---------------------------------
                 //--------------GRUPA 6------------
                 //---------------------------------
@@ -579,25 +614,139 @@ namespace ShowRegSys.Migrations
                 new Breed { Name = "Szorstkow³osy goñczy wandejski", PkrID = 6},
                 new Breed { Name = "Szorstkow³osy goñczy z Nivernais", PkrID = 6},
                 new Breed { Name = "Westfalski goñczy krótkono¿ny", PkrID = 6},
+                
+                //---------------------------------
+                //--------------GRUPA 7------------
+                //---------------------------------
+                new Breed { Name = "Bargue d'Auvergne", PkrID = 7},
+                new Breed { Name = "Bargue du Bourbonnais", PkrID = 7},
+                new Breed { Name = "Bargue Saint-Germain", PkrID = 7},
+                new Breed { Name = "Bargue de l'Ariege", PkrID = 7},
+                new Breed { Name = "Drentse Patrijshond", PkrID = 7},
+                new Breed { Name = "Du¿y Munsterlander", PkrID = 7},
+                new Breed { Name = "Drentse blue de Picardie", PkrID = 7},
+                new Breed { Name = "Epagnul Breton", PkrID = 7},
+                new Breed { Name = "Epagnul de Pont-Audemer", PkrID = 7},
+                new Breed { Name = "Epagnul francis ", PkrID = 7},
+                new Breed { Name = "Epagnul picard", PkrID = 7},
+                new Breed { Name = "Gryfon Korthalsa", PkrID = 7},
+                new Breed { Name = "Ma³y Munsterlander", PkrID = 7},
+                new Breed { Name = "Pointer", PkrID = 7},
+                new Breed { Name = "Seter angielski", PkrID = 7},
+                //new Breed { Name = "Seter irlandzki", PkrID = 7},
+                new Breed { Name = "Seter irlandzki czerwono-bia³y", PkrID = 7},
+                new Breed { Name = "Seter szkocki (Gordon)", PkrID = 7},
+                new Breed { Name = "Wy¿e³ czeski szorstkow³osu (Fousek)", PkrID = 7},
+                new Breed { Name = "Wy¿e³ duñski", PkrID = 7},
+                new Breed { Name = "Wy¿e³ fryzyjski", PkrID = 7},
+                new Breed { Name = "Wy¿e³ gaskoñski", PkrID = 7},
+                new Breed { Name = "Wy¿e³ hiszpañski z Burgos", PkrID = 7},
+                new Breed { Name = "Wy¿e³ niemiecki d³ugow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ niemiecki krótkow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ niemiecki ostrow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ niemiecki szorstkow³osy Pudelpointer", PkrID = 7},
+                new Breed { Name = "Wy¿e³ pirenejski", PkrID = 7},
+                new Breed { Name = "Wy¿e³ portugalski", PkrID = 7},
+                new Breed { Name = "Wy¿e³ s³owacki szorstkow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ weimarski krótkow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ weimerski d³ugow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ wêgierski szorstkow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ w³oski krótkow³osy", PkrID = 7},
+                new Breed { Name = "Wy¿e³ w³oski szorstkow³osy", PkrID = 7},
+                
+                //---------------------------------
+                //--------------GRUPA 8------------
+                //---------------------------------
+                new Breed { Name = "Amerykañski spaniel dowodny", PkrID = 8},
+                new Breed { Name = "Barbet", PkrID = 8},
+                new Breed { Name = "Chesapeake Bay Retriever", PkrID = 8},
+                new Breed { Name = "Clumber Spaniel", PkrID = 8},
+                new Breed { Name = "Cocker spaniel amerykañski", PkrID = 8},
+                new Breed { Name = "Cocker spaniel angielski", PkrID = 8},
+                new Breed { Name = "Curly Coated Retriever", PkrID = 8},
+                new Breed { Name = "Flat Coated Retriever", PkrID = 8},
+                new Breed { Name = "Fryzyjski pies dowodny", PkrID = 8},
+                new Breed { Name = "Golden Retriever", PkrID = 8},
+                new Breed { Name = "Hiszpañski pies dowodny", PkrID = 8},
+                new Breed { Name = "Irlandzki spaniel dowodny", PkrID = 8},
+                new Breed { Name = "Kooikerhondje", PkrID = 8},
+                new Breed { Name = "Labrador Retriever", PkrID = 8},
+                new Breed { Name = "Lagotto romagnolo", PkrID = 8},
+                new Breed { Name = "Nova Scotia Duck Tolling Retriever", PkrID = 8},
+                new Breed { Name = "P³ochacz niemiecki", PkrID = 8},
+                new Breed { Name = "Portugalski pies dowodny", PkrID = 8},
+                new Breed { Name = "Springer spaniel walijski", PkrID = 8},
+                
+                 
+                //---------------------------------
+                //--------------GRUPA 9------------
+                //---------------------------------
+                new Breed { Name = "Bichon frise", PkrID = 9},
+                new Breed { Name = "Boloñczyk", PkrID = 9},
+                new Breed { Name = "Boston Terrier", PkrID = 9},
+                new Breed { Name = "Brabantczyk", PkrID = 9},
+                new Breed { Name = "Buldog francuski", PkrID = 9},
+                new Breed { Name = "Cavalier King Charles Spaniel", PkrID = 9},
+                new Breed { Name = "Chihuahua d³ugow³osy", PkrID = 9},
+                new Breed { Name = "Chihuahua krótkow³osy", PkrID = 9},
+                new Breed { Name = "Chin japoñski", PkrID = 9},
+                new Breed { Name = "Chiñski grzywacz bezw³osy", PkrID = 9},
+                new Breed { Name = "Chiñski grzywacz ow³osiony", PkrID = 9},
+                new Breed { Name = "Coto de Tulear", PkrID = 9},
+                new Breed { Name = "Gryfonik belgijski", PkrID = 9},
+                new Breed { Name = "Gryfonik brukselski", PkrID = 9},
+                new Breed { Name = "Hawañczyk", PkrID = 9},
+                new Breed { Name = "King Charles ", PkrID = 9},
+                new Breed { Name = "Kromfohrlander", PkrID = 9},
+                new Breed { Name = "Lhasa Apso", PkrID = 9},
+                new Breed { Name = "Lwi piesek", PkrID = 9},
+                new Breed { Name = "Maltañczyk", PkrID = 9},
+                new Breed { Name = "Mops", PkrID = 9},
+                new Breed { Name = "Pekiñczyk", PkrID = 9},
+                new Breed { Name = "Pudel du¿y Apicot", PkrID = 9},
+                //new Breed { Name = "Pudel du¿y bia³y", PkrID = 9},
+                new Breed { Name = "Pudel du¿y br¹zowy", PkrID = 9},
+                new Breed { Name = "Pudel du¿y czarny", PkrID = 9},
+                new Breed { Name = "Pudel du¿y srebrny", PkrID = 9},
+                new Breed { Name = "Pudel miniaturowy bia³y", PkrID = 9},
+                new Breed { Name = "Pudel miniaturowy br¹zowy", PkrID = 9},
+                new Breed { Name = "Pudel miniaturowy czarny", PkrID = 9},
+                new Breed { Name = "Pudel miniaturowy srebrny", PkrID = 9},
+                new Breed { Name = "Pudel miniaturowy Apricot", PkrID = 9},
+                new Breed { Name = "Pudel œredni Apricot", PkrID = 9},
+                new Breed { Name = "Pudel œredni bia³y", PkrID = 9},
+                new Breed { Name = "Pudel œredni br¹zowy", PkrID = 9},
+                new Breed { Name = "Pudel œredni czarny", PkrID = 9},
+                new Breed { Name = "Pudel œredni srebrny", PkrID = 9},
+                new Breed { Name = "Shih Tzu", PkrID = 9},
+                new Breed { Name = "Spaniel kontynentalny miniaturowy Papillon", PkrID = 9},
+                new Breed { Name = "Spaniel kontynentalny miniaturowy Phalene", PkrID = 9},
+                new Breed { Name = "Spaniel tybetañski", PkrID = 9},
+                new Breed { Name = "Terier tybetañski", PkrID = 9},
+                new Breed { Name = "Toy Apricot", PkrID = 9},
+                new Breed { Name = "Toy bia³y", PkrID = 9},
+                new Breed { Name = "Toy br¹zowy", PkrID = 9},
+                new Breed { Name = "Toy czarny", PkrID = 9},
+                new Breed { Name = "Toy srebrny", PkrID = 9},
+                
+                //---------------------------------
+                //--------------GRUPA 10-----------
+                //---------------------------------
+                new Breed { Name = "Charcik w³oski", PkrID = 10},
+                new Breed { Name = "Chart afgañski", PkrID = 10},
+                new Breed { Name = "Chart afrykañski", PkrID = 10},
+                new Breed { Name = "Chart arabski", PkrID = 10},
+                new Breed { Name = "Chart hiszpañski", PkrID = 10},
+                new Breed { Name = "Chart perski", PkrID = 10},
+                new Breed { Name = "Chart polski", PkrID = 10},
+                new Breed { Name = "Chart rosyjski borzoj", PkrID = 10},
+                new Breed { Name = "Chart szkocki", PkrID = 10},
+                new Breed { Name = "Chart wêgierski", PkrID = 10},
+                new Breed { Name = "Greyhound", PkrID = 10},
+                new Breed { Name = "Whippet", PkrID = 10},
+                new Breed { Name = "Wilczarz irlandzki", PkrID = 10}
+                
 
-                //---------------------------------
-                //--------------GRUPA 2------------
-                //---------------------------------
-                /*new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                new Breed { Name = "", PkrID = 7},
-                */
             };
 
             breeds.ForEach(b => context.Breeds.AddOrUpdate(p => p.Name, b));

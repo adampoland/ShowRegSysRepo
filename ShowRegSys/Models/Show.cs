@@ -29,6 +29,7 @@ namespace ShowRegSys.Models
         public DateTime Date { get; set; }
 
         [Required]
+        [Display(Name = "Ranga")]
         public int RankID { get; set; }
 
         [Required]

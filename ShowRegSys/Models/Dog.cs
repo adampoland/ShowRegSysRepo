@@ -39,7 +39,6 @@ namespace ShowRegSys.Models
         [Display(Name = "Hodowca")]
         public string Breeder { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data urodzenia")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

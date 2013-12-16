@@ -31,7 +31,11 @@
                                 }
                             <li>@Html.ActionLink("Wystawy", "Index", "Show")</li>
                             <li>@Html.ActionLink("Zgłaszanie", "Create", "Reg")</li>
-                            <li>@Html.ActionLink("Admin", "RoleAddToUser", "Admin")</li>
+                            @if( Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
+                            {
+                                <li>@Html.ActionLink("Zarządzaj rolami", "RoleAddToUser", "Admin")</li>
+                            }
+                            
                         </ul>
                     </nav>
                 </div>

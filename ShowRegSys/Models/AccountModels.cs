@@ -31,7 +31,8 @@ namespace ShowRegSys.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserProfileId { get; set; }
 
-        [Display(Name = "Właściciel")]
+        [Display(Name = "Nazwa użytkownika")]
+        [Required]
         public string UserName { get; set; }
 
         [Display(Name = "Ulica")]
@@ -47,6 +48,7 @@ namespace ShowRegSys.Models
         public string Telephone { get; set; }
 
         [Display(Name = "Email")]
+        [Required]
         public string Email { get; set; }
 
         public int? OrganizerID { get; set; }

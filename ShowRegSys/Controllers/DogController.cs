@@ -118,8 +118,8 @@ namespace ShowRegSys.Controllers
         {
             DogCreateViewModel dog = new DogCreateViewModel();
             dog.UserProfileId = WebSecurity.GetUserId(User.Identity.Name);
-            dog.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.GenderID.ToString() }).ToList();
-            dog.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NameEN, Value = u.ColorID.ToString() }).ToList();
+            dog.GenderList = db.Genders.ToList().Select(u => new SelectListItem { Text = u.NamePL, Value = u.GenderID.ToString() }).ToList();
+            dog.ColorList = db.Colors.ToList().Select(u => new SelectListItem { Text = u.NamePL, Value = u.ColorID.ToString() }).ToList();
             dog.PkrList = db.Pkrs.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.Name }).ToList();
             dog.BreedList = db.Breeds.ToList().Select(u => new SelectListItem { Text = u.Name, Value = u.BreedID.ToString() }).ToList();
             return View(dog);

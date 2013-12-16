@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<ShowRegSys.Models.Image>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+@{
+    ViewBag.Title = "Zarządzanie galerią";
+}
+
+<h2>Zarządzanie galerią</h2>
+<br />
+
+<table>
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Ścieżka
+        </th>
+        <th>
+            <b>Miniaturka</b>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @item.Path
+        </td>
+        <td>
+            <img src="@(item.Path)" width="200" />
+        </td>
+        <td>
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ImageId, showId = ViewBag.ShowId})
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("ImageAdmin", new { id = ViewBag.ShowId, page  }))

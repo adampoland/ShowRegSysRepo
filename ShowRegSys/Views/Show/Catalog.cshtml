@@ -1,62 +1,87 @@
-﻿@** @model ShowRegSys.Models.Show **@
+﻿@model ShowRegSys.ViewModels.ShowCatalogDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
+<p>
+    @Html.ActionLink("Powrót do listy wystaw", "MyShows")
+</p>
 
-
-@**<h2>Show details:</h2>
+<h2>Katalog:</h2>
 <table>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Name)    </b></td>
-        <td>@Html.DisplayFor(model => model.Name)</td>
+        <td><b>@Html.DisplayNameFor(model => model.ShowName)</b></td>
+        <td>@Html.DisplayFor(model => model.ShowName)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Date):</b></td>
+        <td><b>@Html.DisplayNameFor(model => model.City)</b></td>
+        <td>@Html.DisplayFor(model => model.City)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Place)</b></td>
+        <td>@Html.DisplayFor(model => model.Place)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Date)</b></td>
         <td>@Html.DisplayFor(model => model.Date)</td>
     </tr>
     <tr>
-        <td><b>@Html.DisplayNameFor(model => model.Rank):</b></td>
-        <td>@Html.DisplayFor(model => model.Rank.Name)</td>
+        <td><b>@Html.DisplayNameFor(model => model.Rank)</b></td>
+        <td>@Html.DisplayFor(model => model.Rank)</td>
     </tr>
     <tr>
-        <td><b>Organizer name:</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Name)</td>
+        <td><b>@Html.DisplayNameFor(model => model.OrganizerName)</b></td>
+        <td>@Html.DisplayFor(model => model.OrganizerName)</td>
     </tr>
     <tr>
-        <td><b>Telephone:</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Telephone)</td>
+        <td><b>@Html.DisplayNameFor(model => model.Telephone)</b></td>
+        <td>@Html.DisplayFor(model => model.Telephone)</td>
     </tr>
     <tr>
-        <td><b>Email:</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.Email)</td>
+        <td><b>@Html.DisplayNameFor(model => model.Email)</b></td>
+        <td>@Html.DisplayFor(model => model.Email)</td>
     </tr>
     <tr>
-        <td><b>Bank account:</b></td>
-        <td>@Html.DisplayFor(model => model.Organizer.BankAccount)</td>
+        <td><b>@Html.DisplayNameFor(model => model.BankAccount)</b></td>
+        <td>@Html.DisplayFor(model => model.BankAccount)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.WebAddress)</b></td>
+        <td>@Html.DisplayFor(model => model.WebAddress)</td>
+    </tr>
+    <tr>
+        <td><b>@Html.DisplayNameFor(model => model.Attention)</b></td>
+        <td>@Html.DisplayFor(model => model.Attention)</td>
     </tr>
 </table>
 
-    <div class="display-field">
-        <table>
-            <tr>
-                <th>Registered dogs:</th>
-            </tr>
-            @foreach(var item in Model.Enrollments)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dogs.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dogs.Breed.Name)
-                    </td>
-                </tr>
-            }
-        </table>
 
-    </div>
+<h3>Zgłoszone psy:</h3>
+<table>
+    <tr>
+        <td><b>Numer psa</b></td>
+        <td><b>Grupa</b></td>
+        <td><b>Imie i przydomek</b></td>
+        <td><b>Rasa</b></td>
+        <td><b>Klasa</b></td>
+    </tr>
+    @{
+        int i = 1;
+    }
+    
+    @foreach (var enrol in Model.EnrolList)
+    {
+        <tr>
+            <td>@i</td>
+            <td>@enrol.Dogs.PkrID</td>
+            <td>@enrol.Dogs.Name</td>
+            <td>@enrol.Dogs.Breed.Name</td>
+            <td>@enrol.Classes.NamePL</td>
+        </tr>
+        i = i + 1;
+    }
+
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ShowID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy wystaw", "MyShows")
 </p>
-    **@

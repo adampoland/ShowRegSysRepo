@@ -1,0 +1,42 @@
+﻿@model ShowRegSys.Models.Image
+
+@{
+    ViewBag.Title = "Usuń zdjęcie";
+}
+
+<h2>Usuń zdjęcie</h2>
+
+<h3>Na pewno chcesz usunąć to zdjęcie?</h3>
+<br />
+<fieldset>
+    <legend>Zdjęcie:</legend>
+
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Name)</b>
+    </div>
+    <div class="display-field">
+         @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        <b>@Html.DisplayNameFor(model => model.Path)</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Path)
+    </div>
+
+    <div class="display-label">
+        <b>Miniaturka</b>
+    </div>
+    <div class="display-field">
+        <img src="@(Model.Path)" width="200"/>
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Usuń" /> |
+        @Html.ActionLink("Powrót do listy zdjęć", "ImageAdmin", new { showID = ViewBag.ShowID } )
+    </p>
+}

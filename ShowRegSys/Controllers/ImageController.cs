@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ShowRegSys.Models;
 using ShowRegSys.DAL;
+using PagedList;
 
 namespace ShowRegSys.Controllers
 {
@@ -53,13 +54,13 @@ namespace ShowRegSys.Controllers
                     db.Images.Add(image);
                     db.SaveChanges();
                 }
-                ViewBag.Message = "Upload successful";
+                ViewBag.Message = "Przesyłanie zakończone.";
                 return View("AddDone");
             }
             catch (Exception e)
             {
                 throw;
-                ViewBag.Message = "Upload failed";
+                ViewBag.Message = "Przesyłanie przerwane";
                 return RedirectToAction("Index");
             }
         }
@@ -70,12 +71,20 @@ namespace ShowRegSys.Controllers
             return View();
         }
 
+        //
+        //GET /ImageList/5
         public ActionResult ImageList(int showID)
         {
             var images = db.Images.Where(s => s.ShowId == showID).OrderBy(s => s.ImageId);
+            var show = db.Shows.Find(showID);
+            ViewBag.ShowName = show.Name;
+            ViewBag.ShowId = show.ShowID;
             return View(images.ToList());
         }
 
+
+        //
+        //POST /ImageList/5
         public ActionResult SingleImage(int imageId, int showId)
         {
             var images = db.Images.Where(s => s.ShowId == showId).OrderBy(s => s.ImageId).ToArray();
@@ -106,6 +115,62 @@ namespace ShowRegSys.Controllers
             
             var image = db.Images.Find(imageId);
             return View(image);
+        }
+
+
+        //
+        //GET /Image/ImageAdmin/5
+        public ActionResult ImageAdmin(int? page, int id = 0)
+        {
+            var images = db.Images.Where(s => s.ShowId == id).OrderBy(s => s.ImageId);
+            var show = db.Shows.Find(id);
+            ViewBag.ShowName = show.Name;
+            ViewBag.ShowId = show.ShowID;
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            int zlicz = images.ToList().Count();
+
+            if(zlicz > 0)
+            {
+                return View(images.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return RedirectToAction("NoImage");
+            }
+            
+            
+            return View(images.ToList());
+        }
+
+        //
+        //GET Image/Delete/5
+        public ActionResult Delete(int id = 0, int showId = 0)
+        {
+            Image image = db.Images.Find(id);
+            if( image == null )
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ShowId = showId;
+            return View(image);
+        }
+
+        //
+        //POST /Image/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id, int showId)
+        {
+            Image image = db.Images.Find(id);
+            db.Images.Remove(image);
+            db.SaveChanges();
+            string path = image.Path;
+            System.IO.File.Delete(Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + Path.Combine(Server.MapPath("~/Images"), path)));
+
+
+            return RedirectToAction("ImageAdmin", new { showID = showId });
         }
     }
 }
